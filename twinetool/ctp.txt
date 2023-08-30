@@ -1,0 +1,27 @@
+<<widget "speechBOX" container>>
+<<set _linklock to false>>\
+<div id="speechBOX">\
+<table class='speechtable'>
+<tr>
+    <<if $args.length > 2>>
+    <td  width="20vw" style="margin:1em;line-height: 0em;" class="ignore-br">
+        <img @src="$args[2]" width="200vw" class="center" style="position: relative;line-height: 0em;">
+    </td>
+    <</if>>
+    <td width="1%"></td>
+    <td style="vertical-align:text-top;" class="ignore-br">
+    <h1 style="margin:0em;">$args[1]</h1>
+    <hr style="margin:0.2em 0">\
+    <p  style="margin:0em;font-size:18px; line-height: 1.5em;" class="ignore-br">_contents</p>
+    </td>\
+    <td width="5%" style="text-align:center;">
+        <<liveblock>><span id='back'><<if  _linklock == false && _ctp.log.index > 0>><<link "<<scicon caret-up>>">><<ctpBack $back_dialog>><<update>><</link>><</if>></span><</liveblock>>
+        <p>&nbsp;</p>
+        <<liveblock>><span id='next'><<if  _linklock == false && _ctp.log.index < _ctp.stack.length - 1>><<link "<<scicon caret-down>>">><<ctpAdvance $back_dialog>><<update>><</link>><</if>></span><</liveblock>>
+        <p>&nbsp;</p>
+        <<liveblock>><span id='next'><<if  _linklock == false && _ctp.log.index == _ctp.stack.length - 1>><<link "<<scicon forward>>">><<goto $args[0]>><</link>><</if>></span><</liveblock>>
+    </td>
+    </tr>
+</table>
+</div>
+<</widget>>
