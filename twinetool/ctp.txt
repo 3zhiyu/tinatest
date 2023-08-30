@@ -25,3 +25,5 @@
 </table>
 </div>
 <</widget>>
+
+<<widget "scicon">><span @class="'sc-icon sc-' + $args.raw" alt="' + $args.raw + '"></span><</widget>>
