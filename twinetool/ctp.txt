@@ -1,6 +1,5 @@
 <!-- 對話系統 -->
 <<widget "speechBOX" container>>
-<<nobr>>
 <<set _linklock to false>>
 <div id="speechBOX">
 <table class='speechtable'>
@@ -26,7 +25,6 @@
     </tr>
 </table>
 </div>
-<</nobr>>
 <</widget>>
 
 <!-- SugarCube Icons -->
