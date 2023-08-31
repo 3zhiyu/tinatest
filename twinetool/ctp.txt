@@ -1,6 +1,8 @@
+<!-- 對話系統 -->
 <<widget "speechBOX" container>>
-<<set _linklock to false>>\
-<div id="speechBOX">\
+<<nobr>>
+<<set _linklock to false>>
+<div id="speechBOX">
 <table class='speechtable'>
 <tr>
     <<if $args.length > 2>>
@@ -11,9 +13,9 @@
     <td width="1%"></td>
     <td style="vertical-align:text-top;" class="ignore-br">
     <h1 style="margin:0em;">$args[1]</h1>
-    <hr style="margin:0.2em 0">\
+    <hr style="margin:0.2em 0">
     <p  style="margin:0em;font-size:18px; line-height: 1.5em;" class="ignore-br">_contents</p>
-    </td>\
+    </td>
     <td width="5%" style="text-align:center;">
         <<liveblock>><span id='back'><<if  _linklock == false && _ctp.log.index > 0>><<link "<<scicon caret-up>>">><<ctpBack $back_dialog>><<update>><</link>><</if>></span><</liveblock>>
         <p>&nbsp;</p>
@@ -24,6 +26,8 @@
     </tr>
 </table>
 </div>
+<</nobr>>
 <</widget>>
 
+<!-- SugarCube Icons -->
 <<widget "scicon">><span @class="'sc-icon sc-' + $args.raw" alt="' + $args.raw + '"></span><</widget>>
