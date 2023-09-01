@@ -1,0 +1,33 @@
+<!-- 思緒系統變數宣告：預設好勿改 -->
+/* 空陣列 */
+<<set $thoughtclue to []>>
+/* 全為否的陣列 */
+<<set $thoughtjudge to [false, false, false, false, false, false, false, false, false, false]>>
+
+<!-- 思緒系統變數宣告：依自己需求修改 -->
+/* 初始五思緒：可改變數名稱與陣列數值 */
+<<set $missionclue to ['線索1','線索2','線索3','線索4','線索5']>>
+/* 結論十思緒：可改變數名稱與陣列數值 */
+<<set $missioncluesum to []>>
+<<set $missioncluesum[0] to '線索1+2的新線索'>>  <!-- 線索1+2的新線索 -->
+<<set $missioncluesum[1] to '線索1+3的新線索'>>  <!-- 線索1+3的新線索 -->
+<<set $missioncluesum[2] to '線索1+4的新線索'>>  <!-- 線索1+4的新線索 -->
+<<set $missioncluesum[3] to '線索2+3的新線索'>>  <!-- 線索2+3的新線索 -->
+<<set $missioncluesum[4] to '線索1+5的新線索'>>  <!-- 線索1+5的新線索 -->
+<<set $missioncluesum[5] to '線索2+4的新線索'>>  <!-- 線索2+4的新線索 -->
+<<set $missioncluesum[6] to '線索2+5的新線索'>>  <!-- 線索2+5的新線索 -->
+<<set $missioncluesum[7] to '線索3+4的新線索'>>  <!-- 線索3+4的新線索 -->
+<<set $missioncluesum[8] to '線索3+5的新線索'>>  <!-- 線索3+5的新線索 -->
+<<set $missioncluesum[9] to '線索4+5的新線索'>>  <!-- 線索4+5的新線索 -->
+/* 標出必要思緒之陣列：可改變數名稱與true、false */
+<<set $missioncluekey to []>>
+<<set $missioncluekey[0] to false>>  <!-- 線索1+2的新線索 -->
+<<set $missioncluekey[1] to false>>  <!-- 線索1+3的新線索 -->
+<<set $missioncluekey[2] to true>>  <!-- 線索1+4的新線索 -->
+<<set $missioncluekey[3] to false>>  <!-- 線索2+3的新線索 -->
+<<set $missioncluekey[4] to false>>  <!-- 線索1+5的新線索 -->
+<<set $missioncluekey[5] to false>>  <!-- 線索2+4的新線索 -->
+<<set $missioncluekey[6] to false>>  <!-- 線索2+5的新線索 -->
+<<set $missioncluekey[7] to false>>  <!-- 線索3+4的新線索 -->
+<<set $missioncluekey[8] to false>>  <!-- 線索3+5的新線索 -->
+<<set $missioncluekey[9] to true>>  <!-- 線索4+5的新線索 -->

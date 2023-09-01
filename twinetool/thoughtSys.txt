@@ -1,0 +1,57 @@
+/* Thinking */
+ /* $args[0]: thoughtSentence */
+ /* $args[1]: resulsSentence */
+ /* $args[2]: completeThought */
+ /* $args[3]: neededThought */
+ /* $args[4]: this passage name */
+ /* $args[5]: next passage name */
+ /* $args[6]: selectedThought */
+ <<widget "thoughtSys">>
+     <<if $args[6].length == 0>>\
+         <<button $args[0][0]>><<run $args[6].push("0")>><<goto $args[4]>><</button>>\
+         <<button $args[0][1]>><<run $args[6].push("1")>><<goto $args[4]>><</button>>\
+         <<button $args[0][2]>><<run $args[6].push("2")>><<goto $args[4]>><</button>>\
+         <<button $args[0][3]>><<run $args[6].push("3")>><<goto $args[4]>><</button>>\
+         <<button $args[0][4]>><<run $args[6].push("4")>><<goto $args[4]>><</button>>
+         <<set $donethinking to true>>\
+         <<for _i to 0; _i lt $args[3].length; _i++>>\
+             <<if $args[3][_i] && !$args[2][_i]>>\<<set $donethinking to false>>\<</if>>\
+         <</for>>\
+         <<if $donethinking>>
+             [[想完了|$args[5]]]\
+         <</if>>\
+     <<elseif $args[6].length == 1>>\
+         <<if $args[6].includesAny("0")>>$args[0][0]<<elseif !$args[6].includesAny("0")>><<button $args[0][0]>><<run $args[6].push("0")>><<goto $args[4]>><</button>><</if>>\
+         <<if $args[6].includesAny("1")>>$args[0][1]<<elseif !$args[6].includesAny("1")>><<button $args[0][1]>><<run $args[6].push("1")>><<goto $args[4]>><</button>><</if>>\
+         <<if $args[6].includesAny("2")>>$args[0][2]<<elseif !$args[6].includesAny("2")>><<button $args[0][2]>><<run $args[6].push("2")>><<goto $args[4]>><</button>><</if>>\
+         <<if $args[6].includesAny("3")>>$args[0][3]<<elseif !$args[6].includesAny("3")>><<button $args[0][3]>><<run $args[6].push("3")>><<goto $args[4]>><</button>><</if>>\
+         <<if $args[6].includesAny("4")>>$args[0][4]<<elseif !$args[6].includesAny("4")>><<button $args[0][4]>><<run $args[6].push("4")>><<goto $args[4]>><</button>><</if>>
+     <<elseif $args[6].length >= 2>>\
+         <<set $donethinking to true>>\
+         <<for _i to 0; _i lt $args[3].length; _i++>>\
+             <<if $args[3][_i] && !$args[2][_i]>>\<<set $donethinking to false>>\<</if>>\
+         <</for>>\
+         <<if $args[6][0] != $args[6][1]>>\
+         /* <<print $args[6][0] + $args[6][1]>> */
+             <<set $results to $args[6][0] + $args[6][1]>>\
+             <<switch $results>>\
+                 <<case "01" || "10">>\ $args[1][0] <<set $args[2][0] to true>>
+                 <<case "02" || "20">>\ $args[1][1] <<set $args[2][1] to true>>
+                 <<case "03" || "30">>\ $args[1][2] <<set $args[2][2] to true>>
+                 <<case "12" || "21">>\ $args[1][3] <<set $args[2][3] to true>>
+                 <<case "04" || "40">>\ $args[1][4] <<set $args[2][4] to true>>
+                 <<case "13" || "13">>\ $args[1][5] <<set $args[2][5] to true>>
+                 <<case "14" || "41">>\ $args[1][6] <<set $args[2][6] to true>>
+                 <<case "23" || "32">>\ $args[1][7] <<set $args[2][7] to true>>
+                 <<case "24" || "42">>\ $args[1][8] <<set $args[2][8] to true>>
+                 <<case "34" || "43">>\ $args[1][9] <<set $args[2][9] to true>>
+             <</switch>>\
+         <</if>>\
+         <<if $donethinking>>
+             [[想完了|$args[5]]]\
+         <<else>>\
+             <<run $args[6].deleteAt(0, 1)>>
+             [[返回|$args[4]]]\
+         <</if>>\
+     <</if>>
+ <</widget>>
