@@ -1728,13 +1728,17 @@ Config.ui.stowBarInitially = true;
 &lt;div id=&quot;footer&quot; data-passage=&quot;Footer&quot;&gt;&lt;/div&gt;
 */</tw-passagedata><tw-passagedata pid="9" name="start" tags="bg1" position="800,125" size="100,100">&lt;&lt;speechBOX 故事結束 記者 media/img/player.png&gt;&gt;
 &lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;
- 第一句話。
+第一句話。
 &lt;&lt;ctpNext clear&gt;&gt;
 第二句話，會蓋掉第一句話。
 &lt;&lt;ctpNext&gt;&gt;
 第三句話，接在第二句話下一行。
 &lt;&lt;ctpNext nobr&gt;&gt;
 第四句話，接在第三句後面。
+&lt;&lt;ctpNext t8n&gt;&gt;
+第五句話，接在第四句下一行且淡出出現。
+&lt;&lt;ctpNext 0.5s&gt;&gt;
+第六句話，0.5秒後才出現。
 &lt;&lt;/ctp&gt;&gt;
 &lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="*PassageFooter" tags="noreturn" position="50,325" size="100,100"></tw-passagedata><tw-passagedata pid="11" name="*PassageHeader" tags="noreturn" position="50,425" size="100,100"></tw-passagedata><tw-passagedata pid="12" name="*PassageDone" tags="noreturn" position="50,525" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="13" name="*PassageReady" tags="noreturn" position="50,625" size="100,100">&lt;&lt;script&gt;&gt;
   WebFont.load({
