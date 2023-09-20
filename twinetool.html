@@ -3451,7 +3451,6 @@ table.speechtable {
 &lt;h2&gt;好用sugarcube巨集(Macros)&amp;功能API&lt;/h2&gt;
 * [[&lt;&lt;include&gt;&gt;]]
 * [[&lt;&lt;replace&gt;&gt;]]
-* [[&lt;&lt;preload&gt;&gt;|圖片預載]]
 * [[側邊欄相關]]
 * [[彈出與關閉小視窗]]
 * [[自動存檔]]
@@ -3871,10 +3870,8 @@ function doPost(e) {
   const timecount = params.timecount;
 
   // 設定sheet資訊
-  // 試算表 Id
-  const SpreadSheet = SpreadsheetApp.openById(&quot;1iiNu0vAbaIMIrV2K4voJ4eYcm2Ci5mLZE1_NLltfxz4&quot;);
-  // 頁籤名稱
-  const Sheet = SpreadSheet.getSheetByName(&quot;回覆清單&quot;);
+  const SpreadSheet = SpreadsheetApp.openById(&quot;試算表 Id&quot;);
+  const Sheet = SpreadSheet.getSheetByName(&quot;googlesheet工作表名稱&quot;);
   const LastRow = Sheet.getLastRow();
   // 資料寫入對應欄位中
   Sheet.getRange(LastRow+1, 1).setValue(time);
@@ -3986,7 +3983,7 @@ setup.SoundPath = setup.Path + &quot;media/sounds/&quot;;
 
 &lt;&lt;return 返回&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="下拉式選單物品" tags="" position="725,1000" size="100,100">我選擇的是：$listget
 
-[[返回|twine功能整合(業務用)]]</tw-passagedata><tw-passagedata pid="50" name="中文網路字型" tags="" position="950,2800" size="100,100">以下是在twine中加入Google Fonts的中文網頁字型（思源黑體、思源宋體、楷體、圓體），以及內海字體的方法
+&lt;&lt;return 返回&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="中文網路字型" tags="" position="950,2800" size="100,100">以下是在twine中加入Google Fonts的中文網頁字型（思源黑體、思源宋體、楷體、圓體），以及內海字體的方法
 
 * 新增CSS程式碼
 @@color:green;&lt;&lt;include &#39;googlefontcss&#39;&gt;&gt;@@
@@ -6588,7 +6585,7 @@ window.readsheet = function() {
 function doGet() {
   // 設定 sheet 資訊
   var SpreadSheet = SpreadsheetApp.getActiveSpreadsheet();
-  var Sheet = SpreadSheet.getSheetByName(&#39;回覆清單&#39;);
+  var Sheet = SpreadSheet.getSheetByName(&quot;googlesheet工作表名稱&quot;);
   var rows = Sheet.getRange(1, 1, Sheet.getLastRow(), Sheet.getLastColumn()).getValues();
   var data = [];
   for (let i = 1; i &lt; rows.length; i++) {
@@ -6839,6 +6836,7 @@ $playerequip[_i]
 * 輸入框提示詞：選填，為輸入文字的輸入框預設顯示的文字內容。
 * 密碼正解：密碼內容。
 * 如果希望輸入正解後，自動跳轉到新的PASSAGE，可以把@@color:green;&quot;&quot;&quot;&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;成功解鎖！&lt;&lt;/replace&gt;&gt;&quot;&quot;&quot;@@替換成@@color:green;&quot;&quot;&quot;&lt;&lt;goto &#39;新的passage&#39;&gt;&gt;&quot;&quot;&quot;@@
+* 如果要更動輸入錯誤後的訊息，可以把@@color:green;&quot;&quot;&quot;&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;密碼錯誤，再試一次？&lt;&lt;/replace&gt;&gt;&quot;&quot;&quot;@@的「密碼錯誤，再試一次？」改成其他內容。
 
 &lt;&lt;/message&gt;&gt;
 
