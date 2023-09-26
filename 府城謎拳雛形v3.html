@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="府城謎拳雛形v3" startnode="6" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="2AC7FFE6-4787-4918-8961-4466A7EBC28E" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@charset "UTF-8";
+	<tw-storydata name="府城謎拳雛形v3" startnode="6" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="2AC7FFE6-4787-4918-8961-4466A7EBC28E" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@charset "UTF-8";
 
 /* 自訂樣式： 特定樣式自訂tag */
 /* "notran"標籤：取消進入新passage的過渡動畫 */
@@ -2269,26 +2269,30 @@ body.slideWin {
 }
 
 
-/*# sourceMappingURL=style.css.map */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 文字點擊變色 */
-$(document).ready(function() {
+/*# sourceMappingURL=style.css.map */</style><script role="script" id="twine-user-script" type="text/twine-javascript">$(document).ready(function() {
   // 獲取每個字的jQuery對象並設置點擊事件處理程序
   $('.clickable-word').click(function() {
     var $word = $(this);
     
-    // 獲取 data-variable 屬性的值
-    var variableName = $word.data('variable');
-    
-    if (variableName) {
-      // 獲取變數索引
-      var variableIndex = parseInt(variableName.replace('isClicked', ''), 10) - 1;
+    // 檢查變數的值，根據狀態設置顏色
+    if (!$word.hasClass('clicked')) {
+      $word.css('color', 'red');
+      $word.addClass('clicked');
       
-      if (!$word.hasClass('clicked')) {
-        $word.css('color', 'red');
-        $word.addClass('clicked');
+      // 檢查點擊的文字是否有data-variable(isClicked)，如果是，設定變數
+      var dataVariable = $word.data('variable');
+      
+      if (dataVariable) {
+        var variableIndex = parseInt(dataVariable.replace('isClicked', ''), 10) - 1;
         State.variables.isClicked[variableIndex] = true;
-      } else {
-        $word.css('color', 'black'); // 或者您希望的原色
-        $word.removeClass('clicked');
+      }
+    } else {
+      $word.css('color', 'black'); // 或者您希望的原色
+      $word.removeClass('clicked');
+      
+      // 如果再次點擊的文字有data-variable(isClicked)，還原變數
+      var dataVariable = $word.data('variable');
+      if (dataVariable) {
         State.variables.isClicked[variableIndex] = false;
       }
     }
