@@ -3840,7 +3840,7 @@ Normal text. Normal text. Normal text. Normal text. Normal text. //emphasised te
 &lt;img src=&quot;https://drive.google.com/uc?id=14_bGCjdkgHaYjjb5C5uMXcbyKKaZZBv1&quot; width=&quot;100%&quot;&gt;</tw-passagedata><tw-passagedata pid="17" name="製作群" tags="noreturn" position="300,0" size="100,100">街密小組
 
 &lt;&lt;link &quot;« 返回遊戲&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="序章" tags="center" position="1000,100" size="100,100">&lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;fighter.jfif&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
-
+&lt;&lt;notify&gt;&gt;序章&lt;&lt;/notify&gt;&gt;
 @@.delayed;府城，人、神、妖三者共存的奇幻世界。@@
 
 @@.delayed;你扮演的是一位「天地門拳師」，在這多元複雜的世界裡探索冒險，找到隱藏在府城的「真相」。@@
@@ -4167,7 +4167,7 @@ _contents
 &lt;/audio&gt;&lt;/span&gt;
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;序章1內文&#39;&gt;&gt;&lt;/div&gt;
 
-&lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;include &#39;序章1內文&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="38" name="關卡版面範本" tags="" position="725,100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="第一章1" tags="center autosave" position="1300,100" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;天后宮/明寧靖王朱術桂府邸（台南市中西區永福路二段227巷18號）&#39;&gt;&gt;\
+&lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;include &#39;序章1內文&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="38" name="關卡版面範本" tags="" position="725,100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="第一章1" tags="center autosave" position="1300,100" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;天后宮/明寧靖王朱術桂府邸（台南市中西區永福路二段227巷18號）&#39;&gt;&gt;&lt;&lt;notify&gt;&gt;第一章&lt;&lt;/notify&gt;&gt;\
 &lt;h1&gt;【第一章】天地門的試煉&lt;/h1&gt;
 
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第一章1內文&#39;&gt;&gt;&lt;/div&gt;
@@ -4394,7 +4394,8 @@ _contents
 （沒有看到關卡內容，略...）
 
 你和千歲在順風耳的幫助下，逃離了精怪的追捕。
-[[繼續&gt;&gt;|第二章1]]</tw-passagedata><tw-passagedata pid="52" name="第二章1" tags="autosave center" position="1800,100" size="100,100">第二章之後內容未置入</tw-passagedata><tw-passagedata pid="53" name="第二章關卡1判斷" tags="" position="1900,500" size="100,100">&lt;&lt;if State.variables.isClicked[0] === true
+[[繼續&gt;&gt;|第二章1]]</tw-passagedata><tw-passagedata pid="52" name="第二章1" tags="autosave center" position="1800,100" size="100,100">&lt;&lt;notify&gt;&gt;第二章&lt;&lt;/notify&gt;&gt;\
+第二章之後內容未置入</tw-passagedata><tw-passagedata pid="53" name="第二章關卡1判斷" tags="" position="1900,500" size="100,100">&lt;&lt;if State.variables.isClicked[0] === true
     &amp;&amp; State.variables.isClicked[1] === true
     &amp;&amp; State.variables.isClicked[2] === true
     &amp;&amp; State.variables.isClicked[3] === true
