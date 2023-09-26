@@ -2269,37 +2269,7 @@ body.slideWin {
 }
 
 
-/*# sourceMappingURL=style.css.map */</style><script role="script" id="twine-user-script" type="text/twine-javascript">$(document).ready(function() {
-  // 獲取每個字的jQuery對象並設置點擊事件處理程序
-  $('.clickable-word').click(function() {
-    var $word = $(this);
-    
-    // 檢查變數的值，根據狀態設置顏色
-    if (!$word.hasClass('clicked')) {
-      $word.css('color', 'red');
-      $word.addClass('clicked');
-      
-      // 檢查點擊的文字是否有data-variable(isClicked)，如果是，設定變數
-      var dataVariable = $word.data('variable');
-      
-      if (dataVariable) {
-        var variableIndex = parseInt(dataVariable.replace('isClicked', ''), 10) - 1;
-        State.variables.isClicked[variableIndex] = true;
-      }
-    } else {
-      $word.css('color', 'black'); // 或者您希望的原色
-      $word.removeClass('clicked');
-      
-      // 如果再次點擊的文字有data-variable(isClicked)，還原變數
-      var dataVariable = $word.data('variable');
-      if (dataVariable) {
-        State.variables.isClicked[variableIndex] = false;
-      }
-    }
-  });
-});
-
-/* Displaying Images in Twine */
+/*# sourceMappingURL=style.css.map */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* Displaying Images in Twine */
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where the HTML file is
 	// located if you want to run this from inside Twine.
@@ -4372,7 +4342,39 @@ _contents
 &lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;
 &lt;&lt;run Dialog.wiki(Story.get(&#39;第二章關卡1判斷&#39;).processText())&gt;&gt;
 &lt;&lt;run Dialog.open()&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="第一章3" tags="center autosave" position="1300,300" size="100,100">&lt;&lt;set $story to 1&gt;&gt;\
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;script&gt;&gt;
+$(document).ready(function() {
+  // 獲取每個字的jQuery對象並設置點擊事件處理程序
+  $(&#39;.clickable-word&#39;).click(function() {
+    var $word = $(this);
+    
+    // 檢查變數的值，根據狀態設置顏色
+    if (!$word.hasClass(&#39;clicked&#39;)) {
+      $word.css(&#39;color&#39;, &#39;red&#39;);
+      $word.addClass(&#39;clicked&#39;);
+      
+      // 檢查點擊的文字是否有data-variable(isClicked)，如果是，設定變數
+      var dataVariable = $word.data(&#39;variable&#39;);
+      
+      if (dataVariable) {
+        var variableIndex = parseInt(dataVariable.replace(&#39;isClicked&#39;, &#39;&#39;), 10) - 1;
+        State.variables.isClicked[variableIndex] = true;
+      }
+    } else {
+      $word.css(&#39;color&#39;, &#39;black&#39;); // 或者您希望的原色
+      $word.removeClass(&#39;clicked&#39;);
+      
+      // 如果再次點擊的文字有data-variable(isClicked)，還原變數
+      var dataVariable = $word.data(&#39;variable&#39;);
+      if (dataVariable) {
+        State.variables.isClicked[variableIndex] = false;
+      }
+    }
+  });
+});
+&lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="第一章3" tags="center autosave" position="1300,300" size="100,100">&lt;&lt;set $story to 1&gt;&gt;\
 &lt;h1&gt;【第一章】天地門的試煉&lt;/h1&gt;
 
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第一章3內文&#39;&gt;&gt;&lt;/div&gt;
