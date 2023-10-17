@@ -5057,16 +5057,20 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 !!!!&lt;&lt;message &#39;2.在StoryInit中置入以下語法&#39;&gt;&gt;
 @@color:green;{{{&lt;&lt;preload &#39;圖檔1位置&#39; &#39;圖檔2位置&#39;&gt;&gt;}}}@@
 
-*如果載入的圖檔很多，可以建立bat執行檔（bat檔放在圖檔資料夾中執行，就能自動匯出）抓取圖檔位址，代碼如下：
+*如果載入的圖檔很多，可以建立bat執行檔（bat檔放在media資料夾中執行，就能自動匯出資料夾中所有jpg,jpeg,png,gif,bmp,tif,tiff格式的檔案）抓取圖檔位址，代碼如下：
 @@color:green;
 {{{
 @echo off
 setlocal enabledelayedexpansion
 set &quot;list=&quot;
-for %%i in (*.*) do (
-  set &quot;filename=%%~nxi&quot;
-  set &quot;list=!list! &#39;media/!filename!&#39;&quot;
+
+for /r %%i in (*.jpg, *.jpeg, *.png, *.gif, *.bmp, *.tif, *.tiff) do (
+    if &quot;%%~nxi&quot; neq &quot;list.bat&quot; (
+        set &quot;filename=%%~nxi&quot;
+        set &quot;list=!list! &#39;media/!filename!&#39;&quot;
+    )
 )
+
 echo ^&lt;^&lt;preload %list%^&gt;^&gt; &gt; list.txt
 }}}
 @@
