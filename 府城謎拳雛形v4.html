@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="府城謎拳雛形v4" startnode="6" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="2AC7FFE6-4787-4918-8961-4466A7EBC28E" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@charset "UTF-8";
+	<tw-storydata name="府城謎拳雛形v4" startnode="6" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="2AC7FFE6-4787-4918-8961-4466A7EBC28E" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@charset "UTF-8";
 
 /* 自訂樣式： 特定樣式自訂tag */
 /* "notran"標籤：取消進入新passage的過渡動畫 */
@@ -3987,21 +3987,24 @@ Normal text. Normal text. Normal text. Normal text. Normal text. //emphasised te
   &lt;&lt;link &#39;【第四章】&#39;&gt;&gt;&lt;&lt;goto &#39;第四章1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   └&lt;&lt;link &#39;【第四章關卡1】&#39;&gt;&gt;&lt;&lt;goto &#39;第四章關卡1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   └&lt;&lt;link &#39;【第四章關卡2】&#39;&gt;&gt;&lt;&lt;goto &#39;第四章關卡2&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
-  
-  &lt;&lt;if $sequel&gt;&gt;\
-  &lt;&lt;link &#39;【片刻休息-鴨母寮古厝】&#39;&gt;&gt;&lt;&lt;goto &#39;片刻休息3&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;if $sequel&gt;&gt;\
+  &lt;br&gt;&lt;&lt;link &#39;【片刻休息-鴨母寮古厝】&#39;&gt;&gt;&lt;&lt;goto &#39;片刻休息3&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
   
   &lt;&lt;link &#39;【後日談】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   └&lt;&lt;link &#39;【後日談關卡1】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章關卡1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   └&lt;&lt;link &#39;【後日談關卡2】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章關卡2&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   
-  &lt;&lt;link &#39;【遊戲預告】&#39;&gt;&gt;&lt;&lt;goto &#39;預告&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
-  &lt;&lt;/if&gt;&gt;
-  ----
+  &lt;&lt;link &#39;【遊戲預告】&#39;&gt;&gt;&lt;&lt;goto &#39;預告&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+&lt;hr&gt;
   【遊戲測試用連結】
   [[圖片清單|圖片彙整]]
   片刻休息：[[午食|片刻休息1]]、[[枝仔冰城|片刻休息2]]、[[鴨母寮古厝|片刻休息3]]
-  [[從後日談開始|第五章1]]
+&lt;&lt;link &#39;【後日談】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
+  └&lt;&lt;link &#39;【後日談關卡1】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章關卡1&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
+  └&lt;&lt;link &#39;【後日談關卡2】&#39;&gt;&gt;&lt;&lt;goto &#39;第五章關卡2&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
+  
+  &lt;&lt;link &#39;【遊戲預告】&#39;&gt;&gt;&lt;&lt;goto &#39;預告&#39;&gt;&gt;&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="版面預覽" tags="" position="300,825" size="100,100">[[stat page 1]]
 [[stat page 2]]
@@ -4146,11 +4149,9 @@ _contents
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="PassageHeader" tags="noreturn" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="27" name="PassageDone" tags="noreturn" position="200,525" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="PassageReady" tags="noreturn" position="300,525" size="100,100"></tw-passagedata><tw-passagedata pid="29" name="角色資訊" tags="noreturn stat-passage nobr center" position="200,100" size="100,100">&lt;div class=&quot;box header&quot;&gt;
 &lt;h1&gt;$name&lt;/h1&gt;
 &lt;h2&gt;&quot;$nickname&quot;&lt;/h2&gt;
-&lt;span class=&quot;star&quot;&gt;✦&lt;/span&gt;
 
 &lt;ul class=&quot;facts&quot;&gt;
-&lt;li&gt;HP：$hp&lt;/li&gt;
-&lt;li&gt;通過試煉：$level關&lt;/li&gt;
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;100px&quot;&gt;&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -4830,28 +4831,28 @@ $(document).ready(function() {
 根據西遊記的情節排列五張壁畫，思考壁畫中的故事，
 找出齊天大聖被封印的地點。&lt;&lt;set _class = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]&gt;&gt;
 
-&lt;&lt;linkreplace &#39;開始排列壁畫&#39;&gt;&gt;
-//請輸入5張壁畫，每個正確的順序//
+&lt;&lt;linkreplace &#39;開始排列壁畫&#39;&gt;&gt;\
+//請輸入以下壁畫排列的正確順序//
 &lt;div id=&#39;supportercode-form&#39;&gt;\
-&lt;table&gt;
+&lt;table style=&#39;margin: 0 auto;&#39;&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;&lt;htmlimg &quot;wall4.png&quot; &quot;350px&quot;&gt;&gt;&lt;/td&gt;
-&lt;td&gt;&lt;&lt;htmlimg &quot;wall1.png&quot; &quot;350px&quot;&gt;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;&lt;htmlimg &quot;wall4.png&quot; &quot;140px&quot;&gt;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;&lt;htmlimg &quot;wall1.png&quot; &quot;140px&quot;&gt;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;&lt;listbox &quot;$class1&quot;&gt;&gt;&lt;&lt;optionsfrom _class&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;/td&gt;
 &lt;td&gt;&lt;&lt;listbox &quot;$class2&quot;&gt;&gt;&lt;&lt;optionsfrom _class&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;&lt;htmlimg &quot;wall5.png&quot; &quot;350px&quot;&gt;&gt;&lt;/td&gt;
-&lt;td&gt;&lt;&lt;htmlimg &quot;wall2.png&quot; &quot;350px&quot;&gt;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;&lt;htmlimg &quot;wall5.png&quot; &quot;140px&quot;&gt;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;&lt;htmlimg &quot;wall2.png&quot; &quot;140px&quot;&gt;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;&lt;listbox &quot;$class3&quot;&gt;&gt;&lt;&lt;optionsfrom _class&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;/td&gt;
 &lt;td&gt;&lt;&lt;listbox &quot;$class4&quot;&gt;&gt;&lt;&lt;optionsfrom _class&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;&lt;htmlimg &quot;wall3.png&quot; &quot;350px&quot;&gt;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;&lt;htmlimg &quot;wall3.png&quot; &quot;140px&quot;&gt;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;&lt;listbox &quot;$class5&quot;&gt;&gt;&lt;&lt;optionsfrom _class&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;/td&gt;
@@ -4964,9 +4965,9 @@ $(document).ready(function() {
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第三章關卡3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="72" name="第三章關卡3" tags="autosave center" position="2700,800" size="100,100">&lt;h1&gt;【關卡】找到搭船的地方&lt;/h1&gt;
 
-@@color:crimson;請拼出船票，找到搭船的地方，並從地圖中的流域，找到陳天南的目的地。@@
+@@color:crimson;從撕碎的船票可知道搭船的地方為禾寮港，從之推理出陳天南的目的地。@@
 
-對照@@color:green;道具包中的線索@@，拼出船票、找出陳天南的目的地。
+對照@@color:green;道具包中的地圖@@，從禾寮港沿著河道，找出距離禾寮港不遠、且接近河道的廟宇。
 
 &lt;&lt;linkreplace &#39;輸入目的地&#39;&gt;&gt;
 &lt;div id=&#39;supportercode-form&#39;&gt;\
@@ -5145,9 +5146,8 @@ $(document).ready(function() {
 你點點頭，看著自己的掌心，感覺到這雙手肩負了許多責任。
 你繼續跟隨千歲的腳步，尋找其他的拳師。
 
-&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續挑戰後日談&#39; &#39;片刻休息0&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;set $restchoice to &#39;3&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="84" name="圖片彙整" tags="noreturn" position="600,200" size="100,100">&lt;h2&gt;遊戲LOGO(長版+橫版)&lt;/h2&gt;
+&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續挑戰後日談&#39; &#39;片刻休息0&#39;&gt;&gt;&lt;&lt;set $restchoice to &#39;3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="84" name="圖片彙整" tags="noreturn" position="600,200" size="100,100">&lt;h2&gt;遊戲LOGO(長版+橫版)&lt;/h2&gt;
 
 ----
 &lt;h2&gt;遊戲插圖&lt;/h2&gt;
@@ -5299,7 +5299,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;if $story is 5&gt;&gt;\
 你和千歲繼續前往下一個目的地。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續旅程&#39; &#39;第四章0&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="95" name="片刻休息3" tags="autosave center" position="3900,100" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $sequel to true&gt;&gt;&lt;&lt;set $location to &#39;鴨母寮古厝&#39;&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="95" name="片刻休息3" tags="autosave center" position="3900,100" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;鴨母寮古厝&#39;&gt;&gt;\
 &lt;h1&gt;【片刻休息】鴨母寮古厝&lt;/h1&gt;
 
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;片刻休息3內文&#39;&gt;&gt;&lt;/div&gt;
@@ -5486,6 +5486,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 
 
 
+
 &lt;span id=&#39;storylink&#39;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $restchoice&gt;&gt;
@@ -5494,7 +5495,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;case &quot;2&quot;&gt;&gt;
 	&lt;&lt;button &#39;繼續&#39; &#39;片刻休息2&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;case &quot;3&quot;&gt;&gt;
-	&lt;&lt;button &#39;繼續&#39; &#39;片刻休息3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
+	&lt;&lt;button &#39;繼續&#39; &#39;片刻休息3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;set $sequel to true&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;/span&gt;</tw-passagedata><tw-passagedata pid="112" name="第三章關卡1判斷" tags="" position="2800,500" size="100,100">&lt;&lt;if $class1 is &#39;4&#39; and $class2 is &#39;1&#39; and $class3 is &#39;5&#39; and $class4 is &#39;2&#39; and $class5 is &#39;3&#39;&gt;&gt;
@@ -5554,7 +5555,6 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;link &#39;乳香&#39;&gt;&gt;&lt;&lt;set $med to &#39;4&#39;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;&lt;&lt;run Dialog.wiki(Story.get(&#39;第四章關卡2判斷&#39;).processText())&gt;&gt;&lt;&lt;run Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &#39;沒藥&#39;&gt;&gt;&lt;&lt;set $med to &#39;5&#39;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;&lt;&lt;run Dialog.wiki(Story.get(&#39;第四章關卡2判斷&#39;).processText())&gt;&gt;&lt;&lt;run Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="第四章關卡2判斷" tags="" position="3825,600" size="100,100">&lt;&lt;if $med == $random&gt;&gt;
 擊中弱點，打敗無支歧！&lt;br&gt;&lt;br&gt;&lt;&lt;link &#39;繼續&gt;&gt;&#39; &#39;第四章3&#39;&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;else&gt;&gt;
 &lt;&lt;else&gt;&gt;
 弱點錯誤，再試一次？
 (木剋土，土剋水，水剋火，火剋金，金剋木)
