@@ -143,6 +143,20 @@ body.restbg {
     min-height: 100vh;
 }
 
+/* 小知識補充 */
+#tips {
+    background-color: #ffd;
+    font-family: 'naikaifont';
+    color: #5f5f5f;
+  	padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.tipstitle {
+	color: black;
+    font-family: --titlefont;;
+}
+
 /* 藥籤關卡 */
 /* 電視 */
 #tv {
@@ -4342,7 +4356,7 @@ _contents
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;序章1內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="序章關卡" tags="center autosave" position="1000,500" size="100,100">&lt;h1&gt;【關卡】找出試煉的場所&lt;/h1&gt;
 
 根據師姐千歲所算結果，試煉的場所與「王、寧、府、靖」四個字有關。
-請依照這四個字，對照@@color:green;道具包的地圖@@，找到試煉場所！
+請依照這四個字，對照@@color:green;遊戲摺頁的地圖@@，找到試煉場所！
 
 &lt;&lt;linkreplace &#39;輸入試煉場所名稱。&#39;&gt;&gt;
 &lt;div id=&#39;supportercode-form&#39;&gt;\
@@ -4358,22 +4372,26 @@ _contents
 &lt;&lt;/button&gt;&gt;\
 &lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="序章1內文" tags="" position="1100,225" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
-火焰吞噬了天地門，數百兵馬侵入了天地門的地盤，拳師們對抗這群不明身份的兵馬；即便每位拳師擁有以一擋百的能力，對上無窮無盡的敵人，一一敗下陣來。
+火焰吞噬了天地門，數百兵馬侵入了天地門的地盤，拳師們對抗這群不明身份的兵馬；每位拳師擁有以一擋百的能力，對上無窮無盡的敵人，仍一一敗下陣來。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-而，你扮演著一位剛入門的「拳師」，也深陷在這場戰鬥中。
+而，你扮演著一位剛入門的「拳師」，深陷於這場戰鬥中。
 此時，你被一股強大的力量打在明宗人府的大門上，眼看周邊熊熊烈火，你望向前方那位力量的始作俑者──
 
 @@color:red;一位「神祕的刀客」。@@
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
-你使出不熟練的拳法，依舊難以敵擋刀客的攻擊，加上數百回合的對峙⋯⋯
+你使出不熟練的拳法，難以敵擋刀客的攻勢，加上數百回合的對峙⋯⋯
+
 擦不盡的汗水。
+
 炎熱造成氣管的呼吸不良與喉嚨的乾裂。
+
 兩拳痠痛。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 4&gt;&gt;\
 你的視線模糊，已經看清楚刀客的模樣，唯一記得是刀客身上傳來「鳳凰花」的香味。刀客並不想花費太多力氣，他的長刀刺入你的胸口，一陣鑽心的刺痛，你失去了一切。
+
 一切化為黑暗。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 5&gt;&gt;\
@@ -4398,7 +4416,7 @@ _contents
 &lt;i&gt;「拳師的試煉需要由神明來考核，每位拳師的試煉都不同，我來幫你算算。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 10&gt;&gt;\
-你看見千歲攤開一張百字圖，上頭是天地門的暗號，只見千歲肩上的白文鳥跳在百字圖上，在數個字來回跳動。
+你看見千歲攤開一張「百字圖」，裡頭書寫著天地門的暗號，只見千歲肩上的白文鳥跳在百字圖上，在數個字間來回跳動。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 11&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -4438,35 +4456,40 @@ _contents
 &lt;&lt;if $story is 4&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「順風耳大人，我們是天地門唯一的倖存者。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「（趕緊說明來意）順風耳大人，清兵攻破天地門，只有我們倖存。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 5&gt;&gt;\
-千歲趕緊向順風耳說明來意。
+&lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「天地門之事，吾等已知，聽汝聲，應是代理掌門千歲小姐。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 6&gt;&gt;&lt;div id=&quot;speech&quot;&gt;\
-&lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「天地門發生的事情，吾等已經聽說，聽汝聲，應該是代理掌門千歲小姐。」&lt;/i&gt;&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $story is 7&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
 &lt;i&gt;「是。此次前來叨擾，是想帶門生前來接受拳師試煉。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 7&gt;&gt;\
+你看見一位高大赤色皮膚的男人走出來，應該是千歲提到的順風耳。
+&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 8&gt;&gt;\
-你看見一位高大赤色皮膚的男人走出來，應該是千歲提到的順風耳，你趕緊向順風耳表達自己的目的，順風耳願意將天地門的拳法傳授給你，但你必須通過試煉，來證明自己擁有成為拳師的資質。
+你趕緊向順風耳表達自己的目的，順風耳願意將天地門的拳法傳授給你，但你必須通過試煉，來證明自己擁有成為拳師的資質。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 9&gt;&gt;&lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「拳師的拳法來自於府城的萬物，請屏住呼吸，感受到全身的氣流，把手張開，去感受關於天地門的拳法。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「拳師的拳法來自於府城的萬物，屏氣凝神，感受到全身的氣流，把手張開，感受天地門的拳法。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第一章關卡1&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="41" name="第一章關卡1" tags="center autosave" position="1300,500" size="100,100">&lt;h1&gt;【關卡】找出「天地門的暗號」&lt;/h1&gt;
 
 @@color:crimson;擺出天地門獨有的手勢，並從中找出關於「天地門的暗號」。@@
 
-根據@@color:green;小冊子的說明@@，擺出天地門特有的手勢。
+根據@@color:green;遊戲摺頁的【手指對應天干地支圖】@@，擺出天地門特有的手勢。
 通過後，順風耳就會告訴你天地門的暗號。
 
-[[開始擺手勢&gt;&gt;|第一章關卡1-1]]</tw-passagedata><tw-passagedata pid="42" name="第一章關卡1-1" tags="center autosave" position="1400,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=tips&gt;&lt;span class=tipstitle&gt;&lt;strong&gt;【小知識：天地門簡史】&lt;/strong&gt;&lt;/span&gt;
+成立的時間為丁亥永曆元年，為了反抗清朝、守護府城而建立。清軍為了降伏府城的人民，暗中引進妖怪，希望可以控制府城。天地門非常重視手勢，手勢可以算干支、時辰或五行。亦是克敵的重要掌法。
+&lt;/div&gt;
+[[開始擺手勢&gt;&gt;|第一章關卡1-1]]</tw-passagedata><tw-passagedata pid="42" name="第一章關卡1-1" tags="center autosave" position="1400,500" size="100,100">每當天地門的拳師相遇，都必須擺出手勢，確認彼此的身分。
+相認的手勢是用大拇指點出天地門成立的天干地支。
+&lt;&lt;nobr&gt;&gt;
 &lt;map name=&quot;infographic&quot;&gt;
     &lt;area target=&quot;&quot; alt=&quot;甲&quot; title=&quot;甲&quot; onclick=&quot;$.wiki(&#39;&lt;&lt;goto &amp;quot;第一章關卡1-2&amp;quot;&gt;&gt;&#39;)&quot; coords=&quot;116,164,98,149&quot; shape=&quot;rect&quot; /&gt;
     &lt;area target=&quot;&quot; alt=&quot;乙&quot; title=&quot;乙&quot; onclick=&quot;$.wiki(&#39;&lt;&lt;goto &amp;quot;第一章關卡1-2&amp;quot;&gt;&gt;&#39;)&quot; coords=&quot;88,114,106,131&quot; shape=&quot;rect&quot; /&gt;
@@ -4482,7 +4505,9 @@ _contents
 &lt;div class=&quot;resizable imageMapObserve&quot; style=&quot;width: 300px;&quot;&gt;
 	&lt;img usemap=&quot;#infographic&quot; alt=&quot;影像地圖&quot; @src=&quot;setup.ImagePath+&#39;天干手勢.jpg&#39;&quot; /&gt;
 &lt;/div&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="第一章關卡1-2" tags="center" position="1500,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="第一章關卡1-2" tags="center" position="1500,500" size="100,100">每當天地門的拳師相遇，都必須擺出手勢，確認彼此的身分。
+相認的手勢是用大拇指點出天地門成立的天干地支。
+&lt;&lt;nobr&gt;&gt;
 &lt;map name=&quot;infographic&quot;&gt;
     &lt;area target=&quot;&quot; alt=&quot;子&quot; title=&quot;子&quot; coords=&quot;140,139,155,155&quot; shape=&quot;rect&quot; onclick=&quot;$.wiki(&#39;&lt;&lt;goto &amp;quot;第一章關卡1-3&amp;quot;&gt;&gt;&#39;)&quot; /&gt;
     &lt;area target=&quot;&quot; alt=&quot;丑&quot; title=&quot;丑&quot; coords=&quot;110,133,129,150&quot; shape=&quot;rect&quot; onclick=&quot;$.wiki(&#39;&lt;&lt;goto &amp;quot;第一章關卡1-3&amp;quot;&gt;&gt;&#39;)&quot; /&gt;
@@ -4512,26 +4537,34 @@ _contents
 你打出的掌法，在空間發出一陣強風，就連經驗豐富的千歲，也從未看見這「從天而降吹來的掌風」。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-你向順風耳說出了暗號，順風耳表示你可以進行下一步的試煉，在進入下一個試煉時，順風耳談起最近府城的不平靜，不知是否與「神祕的刀客」有關。
+你向順風耳比出了暗號，順風耳表示你可以進行下一步的試煉。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「府城是由人神妖三者維持在一個平衡，但最近有人試圖打破這個平衡，令精怪闖入廟宇，神明就算神通廣大，也難以接受一次又一次的騷擾，吾等也擔憂，平靜的府城究竟發生了什麼事？」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「記得天地門的暗號是：『天地門興』，之後遇到同門直接說出暗號即可。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 4&gt;&gt;\
-你明白了順風耳的心思，便隨著順風耳來到天后宮的暗室。暗室中充滿著各種飛禽走獸。
+在進入下一個試煉時，順風耳談起最近府城的不平靜，不知是否與「神祕的刀客」有關。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 5&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「這裡是天后宮的練武房，整個房間就是一本拳譜，你必須理解房間裡的機關，才能習得天地門的拳法。」&lt;/i&gt;&lt;/div&gt;\
+&lt;i&gt;「府城是由人神妖三者維持在一個平衡，但最近有人試圖打破這個平衡，令精怪闖入廟宇，神明就算神通廣大，也難以接受一次又一次的騷擾，吾等也擔憂，平靜的府城究竟發生了什麼事？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 6&gt;&gt;\
+你明白了順風耳的心思，便隨著順風耳來到天后宮的暗室。暗室中充滿著各種飛禽走獸。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 7&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;順風耳.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「這裡是天后宮的練武房，整個房間就是一本拳譜，你必須理解房間裡的機關，才能習得天地門的拳法。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第一章關卡2&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="46" name="第一章關卡2" tags="center autosave" position="1300,600" size="100,100">&lt;h1&gt;【關卡】找到破解機關的方法&lt;/h1&gt;
 
 @@color:crimson;你要依照順風耳的指示，學習天地門的拳法。@@
 
-根據@@color:green;小冊子的說明@@，從天后宮裡，
+根據@@color:green;遊戲摺頁的天后宮平面圖@@，
 找出關於「動物」的線索，並依照生肖的順序排列。
 
 &lt;&lt;linkreplace &#39;輸入答案&#39;&gt;&gt;
@@ -4673,10 +4706,10 @@ $(document).ready(function() {
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第一章3內文&#39;&gt;&gt;&lt;/div&gt;
 
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第一章3內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="50" name="第一章3內文" tags="" position="1400,300" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
-你解開了機關，此時你感受到「天地門的拳法」正在體內運行。
+你解開了機關，此時你感受到「天地門的拳法」正在你體內運行。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-此時，你聽見千歲的叫喊聲，只見天后宮出現一群兵馬，這些兵馬跟燒毀天地門是同樣一群人。
+此時，你聽見千歲的叫喊聲，只見天后宮出現一群兵馬，是燒毀天地門的那群人。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -4695,7 +4728,7 @@ $(document).ready(function() {
 
 @@color:crimson;趕去關聖帝君的廟宇。@@
 
-從@@color:green;小冊子的地圖@@，
+從@@color:green;遊戲摺頁的地圖@@，
 找出關聖帝君所在的廟宇。
 
 &lt;&lt;linkreplace &#39;輸入答案&#39;&gt;&gt;
@@ -4705,7 +4738,7 @@ $(document).ready(function() {
 &lt;&lt;button &#39;輸入&#39;&gt;&gt;
 	&lt;&lt;set $inputtext to _inputtext.trim()&gt;&gt;
 	&lt;&lt;if $inputtext is &#39;祀典武廟&#39; &gt;&gt;
-		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;你和千歲在順風耳的幫助下，順利找到關聖帝君的廟宇，並逃離了精怪的追捕。&lt;br&gt;&lt;br&gt;[[繼續&gt;&gt;|第二章0]]&lt;&lt;/replace&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;你和千歲在順風耳的幫助下，順利找到關聖帝君的廟宇，逃離了精怪的追捕。&lt;br&gt;&lt;br&gt;[[繼續&gt;&gt;|第二章0]]&lt;&lt;/replace&gt;&gt;
 	&lt;&lt;else&gt;&gt;
 		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;不是這個名字喔，再試一次？&lt;&lt;/replace&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
@@ -4749,6 +4782,7 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
 你在暗中看見關聖帝君被精怪包圍，關聖帝君周邊的武將不敵精怪，陷入弱勢。
+
 此刻，你與千歲殺入敵陣中，與關聖帝君共同對抗精怪。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
@@ -4762,7 +4796,7 @@ $(document).ready(function() {
 &lt;&lt;if $story is 5&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「不好，這箭上塗抹精怪的毒物，如果不趕緊治療，毒物蔓延會傷害到關聖帝君大人，要不，我們趕緊撤退，此地不能久留。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「不好，這箭上塗抹精怪的毒物，如果不趕緊治療，毒物萬一蔓延，關聖帝君大人就……，要不，我們趕緊撤退，此地不能久留。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 6&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -4770,15 +4804,15 @@ $(document).ready(function() {
 &lt;i&gt;「想不到我關羽英明一世⋯⋯」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 7&gt;&gt;\
-狂風停止，一只怪鳥出現，擋住眾人的去路。
+狂風停止，一隻怪鳥出現，擋住眾人的去路。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 8&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「可惡，又來一只。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「可惡，又來一隻。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 9&gt;&gt;\
-在危急中，你想到關聖帝君背上的箭，你思索到或許「可以利用箭對付怪鳥」
+在危急中，你想到關聖帝君背上的箭，你思索到或許「可以利用箭對付怪鳥」。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 10&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -4823,10 +4857,12 @@ $(document).ready(function() {
 @@color:crimson;千歲把療傷的漢藥知識交給你，但她忘記劑量了，
 只記得與廟中的對聯有關！@@
 
-根據@@color:green;小冊子的說明@@，找出正確的劑量，
+根據@@color:green;遊戲摺頁紀錄的隨身漢藥包以及藥方@@，找出正確的劑量，
 為關聖帝君搭配療藥。
+（提示：一斤=600g　一斤等於十六兩　一兩等於十錢）
 
 &lt;&lt;linkreplace &#39;輸入劑量&#39;&gt;&gt;&lt;div id=&#39;med&#39;&gt;
+請輸入阿拉伯數字。
 兒茶：&lt;&lt;textbox &#39;$ercha&#39; &#39;0&#39; autofocus&gt;&gt;(克)
 血竭：&lt;&lt;textbox &#39;$siehjieh&#39; &#39;0&#39; autofocus&gt;&gt;(克)
 冰片：&lt;&lt;textbox &#39;$bingpian&#39; &#39;0&#39; autofocus&gt;&gt;(克)
@@ -4900,7 +4936,7 @@ $(document).ready(function() {
 &lt;&lt;link &#39;繼續詢問&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第二章3內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="63" name="第二章關卡3" tags="autosave center" position="1800,700" size="100,100">&lt;h1&gt;【關卡】前往『府城猴子』的住處&lt;/h1&gt;
 
-對照@@color:green;道具包的地圖@@，『府城猴子』住處是在哪！
+對照@@color:green;遊戲摺頁的地圖@@，『府城猴子』住處是在哪！
 
 &lt;&lt;linkreplace &#39;輸入『府城猴子』住處名稱。&#39;&gt;&gt;
 &lt;div id=&#39;supportercode-form&#39;&gt;\
@@ -4922,7 +4958,7 @@ $(document).ready(function() {
 
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第三章1內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="65" name="第三章1內文" tags="" position="2800,100" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
 &lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch3story_1.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
-原來關聖帝君口中的猴子，正是「萬福庵」的主神「孫悟空/齊天大聖」。
+原來關聖帝君口中的猴子，正是「萬福庵」的主神「孫悟空／齊天大聖」。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
 當你來到「萬福庵」，聞到一股「鳳凰花」的香味，你看見刀客正與精怪在萬福庵周邊挖掘某樣「東西」。
@@ -4948,9 +4984,10 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 8&gt;&gt;\
 小猴子用力的點點頭。
+
 你盤坐在主殿前，仔細觀察這五面壁畫。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第三章關卡1&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="66" name="第三章關卡1" tags="autosave center" position="2700,500" size="100,100">&lt;h1&gt;【關卡】找出大聖爺的蹤跡&lt;/h1&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="66" name="第三章關卡1" tags="autosave center" position="2700,700" size="100,100">&lt;h1&gt;【關卡】找出大聖爺的蹤跡&lt;/h1&gt;
 
 @@color:crimson;你看到萬福庵的五張壁畫隱隱發光。@@
 
@@ -5031,7 +5068,8 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 10&gt;&gt;\
 當刀客要給你最後一擊時，你感覺到刀客散發出另一股氣息。
-千歲流露出難怪的表情。
+
+千歲流露出難過的表情。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 11&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -5040,6 +5078,7 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 12&gt;&gt;\
 掌門？難道刀客的真實身份是天地門的「掌門」？
+
 你現在沒有絲毫的體力，此時你聽見樹王公的聲音。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 13&gt;&gt;\
@@ -5055,11 +5094,12 @@ $(document).ready(function() {
 &lt;&lt;htmlimg &quot;神祕的聲音.png&quot; &quot;50%&quot;&gt;&gt;
 &lt;i&gt;「很好，我來告訴你解開封印的辦法。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第三章關卡2&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="69" name="第三章關卡2" tags="autosave center" position="2700,600" size="100,100">&lt;h1&gt;【關卡】解開神祕聲音的封印&lt;/h1&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="69" name="第三章關卡2" tags="autosave center" position="2700,800" size="100,100">&lt;h1&gt;【關卡】解開神祕聲音的封印&lt;/h1&gt;
 
 @@color:crimson;孫悟空被五指山封印了。當你打算解開大聖爺的封印，卻發現另一個手掌正靠近你。@@
 
-對照@@color:green;道具包@@，找出那隻手掌的弱點，解除危機。
+妖怪的屬性有五行，為了屬性相剋，天地門的拳法亦有五種拳法。
+對照@@color:green;遊戲摺頁的五行相剋表@@，找出那隻手掌的弱點，解除危機。
 
 [[開始尋找弱點&gt;&gt;|第三章關卡2-1]]</tw-passagedata><tw-passagedata pid="70" name="第三章3" tags="autosave center" position="2700,300" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;萬福庵&#39;&gt;&gt;
 &lt;h1&gt;【第三章】府城的猴子&lt;/h1&gt;
@@ -5069,6 +5109,7 @@ $(document).ready(function() {
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第三章3內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="71" name="第三章3內文" tags="" position="2800,300" size="100,100">&lt;&lt;if $story is 1&gt;&gt;&lt;&lt;set _ask to []&gt;&gt;\
 &lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch3story_3.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
 「齊天大聖！」
+
 你手中燃燒著一股力量，這股力量消滅了萬福庵出沒的精怪，陳天南見狀，知道自身的狀態不敵你，便趕緊逃走。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
@@ -5076,6 +5117,7 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 等你醒了過來，發現自己躺在千歲的膝蓋上。
+
 你紅著臉，急忙起身，便詢問剛才在萬福庵發生的事情。
 &lt;&lt;button &#39;詢問「齊天大聖」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;齊天大聖&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;齊天大聖&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button &#39;詢問「陳天南」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;陳天南&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;陳天南&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
@@ -5083,26 +5125,47 @@ $(document).ready(function() {
 &lt;&lt;if _ask.length === 0&gt;&gt;&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 4&gt;&gt;\
-你似乎逐步理解事實的真相，但很多事情還是得要詢問陳天南。
+你似乎逐步理解事實的真相，但很多事情還是得要詢問陳天南，你現在並不知道陳天南的下落。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第三章3內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 5&gt;&gt;\
-你現在並不知道陳天南的下落，千歲拿出數張撕碎的船票，或許能知道陳天南即將前往的方向。
-&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第三章關卡3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="72" name="第三章關卡3" tags="autosave center" position="2700,800" size="100,100">&lt;h1&gt;【關卡】找到搭船的地方&lt;/h1&gt;
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;齊天大聖.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「奇怪，怎麼康元帥還沒來？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 6&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「大聖爺，請問康元帥找您有甚麼事情？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 7&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;齊天大聖.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「是這樣的，我之前跟開基靈祐宮的玄天上帝出去玩，不小心把我的頭箍和玄天上帝的通天冠搞混了。之前康元帥把我的頭箍還回來了，但忘記把留在我這邊的通天冠拿回去。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 8&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「若大聖爺不嫌棄，我們可以幫您還回去。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;if $story is 9&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;齊天大聖.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「太好了，你就幫我把通天冠還到開基靈祐宮那邊。那裡靠近赤崁樓，或許可以知道清兵的一些動靜。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;前往開基靈祐宮&#39; &#39;第三章4&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="72" name="第三章關卡3" tags="autosave center" position="2700,1000" size="100,100">&lt;h1&gt;【關卡】將通天冠調整正確的位置&lt;/h1&gt;
 
-@@color:crimson;從撕碎的船票可知道搭船的地方為禾寮港，從之推理出陳天南的目的地。@@
+@@color:crimson;根據師姐的推論，或許入口木牌上，有通天冠擺放位置的提示。@@
 
-對照@@color:green;道具包中的地圖@@，從禾寮港沿著河道，找出距離禾寮港不遠、且接近河道的廟宇。
+對照@@color:green;入口左邊木牌上的說明@@，找出開基靈佑宮最初興建時的方位，來擺放通天冠。
 
-&lt;&lt;linkreplace &#39;輸入目的地&#39;&gt;&gt;
+&lt;&lt;linkreplace &#39;擺放通天冠&#39;&gt;&gt;
 &lt;div id=&#39;supportercode-form&#39;&gt;\
-目的地名稱：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是興濟宮&#39; autofocus&gt;&gt; \
+通天冠的擺放位置：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是座西朝東&#39; autofocus&gt;&gt; \
 &lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
 &lt;&lt;button &#39;輸入&#39;&gt;&gt;
 	&lt;&lt;set _inputtext to _inputtext.trim()&gt;&gt;
-	&lt;&lt;if _inputtext is &#39;興濟宮&#39;&gt;&gt;
-      &lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;恭喜找到陳天南的目的地！&lt;br&gt;&lt;br&gt;[[繼續&gt;&gt;|片刻休息0]]&lt;&lt;set $restchoice to &#39;2&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;if _inputtext is &#39;座西朝東&#39;&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;擺放位置正確，[[繼續&gt;&gt;|第三章5]]。&lt;&lt;/replace&gt;&gt;
 	&lt;&lt;else&gt;&gt;
 		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;@@color:red;好像不是喔，再試一次？@@&lt;&lt;/replace&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
@@ -5137,10 +5200,12 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="77" name="第四章1內文" tags="autosave center" position="3700,100" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
 &lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch4story_1.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
 你和千歲總算追上陳天南的腳步，來到了「興濟宮」。
+
 興濟宮外，已經駐足許多精怪，看來陳天南是有備而來。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
 你隨著千歲，跳上屋簷，從高處尋找陳天南的蹤跡。
+
 你們看見陳天南正和一位清朝官員說話。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
@@ -5203,10 +5268,17 @@ $(document).ready(function() {
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第四章2內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="80" name="第四章2內文" tags="" position="3700,200" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
 &lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch4story_2.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
 當你摸完虎爺的下巴，突然虎爺兩眼發光，照在陳天南的身上。
+<<<<<<< Updated upstream
 藉由保生大帝的力量，陳天南的身體開始發生變化，化為「精怪·無支歧」。
+=======
+
+藉由保生大帝的力量，陳天南的身體開始發生變化，化為「精怪．無支歧」。
+>>>>>>> Stashed changes
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-原來陳天南掌門早已遭到暗算，保生大帝的籤詩，暗指陳天南已經不是人，而是精怪。
+原來陳天南掌門早已遭到暗算。
+
+保生大帝的籤詩，暗指陳天南已經不是人，而是精怪。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
@@ -5222,7 +5294,8 @@ $(document).ready(function() {
 無支歧有五個屬性，會隨時變換，每次變換，
 身上的毛色就會變成那個屬性的代表色。
 
-請根據小冊子的五行相剋圖，對無支歧丟出相剋的藥材。
+擊退妖怪，要先吃相生的漢藥增強你的體力，接著使出克制妖怪屬性的拳法。
+請根據@@color:green;遊戲摺頁的五行相生表@@，選擇服用的漢藥。
 
 [[對抗無支歧&gt;&gt;|第四章關卡2-1]]</tw-passagedata><tw-passagedata pid="82" name="第四章3" tags="" position="3600,300" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;興濟宮&#39;&gt;&gt;\
 &lt;h1&gt;【第四章】天地拳師&lt;/h1&gt;
@@ -5244,8 +5317,8 @@ $(document).ready(function() {
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 4&gt;&gt;\
 你點點頭，看著自己的掌心，感覺到這雙手肩負了許多責任。
-你繼續跟隨千歲的腳步，尋找其他的拳師。
 
+你繼續跟隨千歲的腳步，尋找其他的拳師。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續挑戰後日談&#39; &#39;片刻休息0&#39;&gt;&gt;&lt;&lt;set $restchoice to &#39;3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="84" name="圖片彙整" tags="noreturn" position="600,200" size="100,100">&lt;h2&gt;遊戲LOGO(長版+橫版)&lt;/h2&gt;
 
@@ -5343,7 +5416,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;link &#39;繼續選擇&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;片刻休息1內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="89" name="八寶冰" tags="" position="2400,200" size="100,100">&lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「我知道現在很熱，但赤崁樓這間八寶冰只在晚上開，想想我曾經也跟掌門一起來享用過，通常我會加上一顆傳統布丁，在淋上滿滿的黑糖水，身為拳師集便要保持體重，也不能輕易錯過。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「我知道現在很熱，但赤崁樓這間八寶冰只在晚上開，想想我曾經也跟掌門一起來享用過，通常我會加上一顆傳統布丁，在淋上滿滿的黑糖水，身為拳師即便要保持體重，也不能輕易錯過。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;if _ask.includesAll(&#39;八寶冰&#39;, &#39;棺材板&#39;, &#39;肉臊飯&#39;)&gt;&gt;\
 &lt;&lt;link &#39;繼續選擇&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;片刻休息1內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;link &#39;結束選擇&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;片刻休息1內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;else&gt;&gt;
@@ -5365,7 +5438,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 在前往下一個目的地的途中，你感覺渾身疲倦，飢腸轆轆。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-千歲建議就在附近「午時」，補充流失的蛋白質與熱量，才有動力繼續下一趟冒險。
+千歲建議就在附近「午食」，補充流失的蛋白質與熱量，才有動力繼續下一趟冒險。
 &lt;&lt;button &#39;選擇「肉臊飯」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;肉臊飯&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;肉臊飯&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button &#39;選擇「八寶冰」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;八寶冰&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;八寶冰&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button &#39;選擇「棺材板」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;棺材板&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;棺材板&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
@@ -5373,6 +5446,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 經過豐盛的午食後，你感覺到你的體重正有效率的增加。
+
 你和千歲起身往下一個目的地前進。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續旅程&#39; &#39;第三章0&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="93" name="片刻休息2" tags="autosave center" position="3300,100" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;枝仔冰城&#39;&gt;&gt;\
@@ -5384,16 +5458,17 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 在前往下一個目的地的時候，你已經流失大量的汗水，需要「吃涼」。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-你和千歲移動到「枝仔冰城」。
+你和千歲移動到「枝仔冰城」。&lt;&lt;set $location to &#39;枝仔冰城&#39;&gt;&gt;
 你發現一樓有許多冰品，你不知道該如何選擇。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「枝仔冰城幾乎是每位拳師小時候的回憶，我每次來都會以大雞腿飯加上芋仔聖代，這樣的組合拳度過府城炎熱的午後，雖然吃過豐富的午食，我還是能吃一個雞腿飯。」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「枝仔冰城幾乎是每位拳師小時候的回憶，我每次來都會以大雞腿飯加上芋仔聖代，這樣的組合拳度過府城炎熱的午後，雖然吃過豐富的午食，我還是能再吃一個雞腿飯。」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 4&gt;&gt;\
 你享用過大雞腿飯和各種冰品。
+
 你感覺到你的體重已經變重了，請繼續保持。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 5&gt;&gt;\
@@ -5408,13 +5483,16 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 你和千歲短暫阻止精怪的陰謀，千歲眼看時間不早，需要找客棧投宿。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-他提議到「鴨母寮市場」看看，但千歲建議也去關心一下「鴨母寮市場」周邊的美食。
+千歲提議到「鴨母寮市場」看看。
+
+但千歲也建議關心一下「鴨母寮市場」周邊的美食。
 &lt;&lt;button &#39;選擇「阿婆布丁」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;阿婆布丁&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;阿婆布丁&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button &#39;選擇「海漾風華」&#39;&gt;&gt;&lt;&lt;run _ask.pushUnique(&#39;海漾風華&#39;)&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;海漾風華&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;if _ask.length === 0&gt;&gt;&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 你感覺體重越來越重，已經達到舉步維艱的地步。
+
 你和千歲前往鴨母寮深處的古厝。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;繼續旅程&#39; &#39;第五章0&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="97" name="第五章1內文" tags="" position="4300,100" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
@@ -5422,14 +5500,16 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 在鴨母寮古厝休息後，你找不到千歲。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-你詢問古厝的老闆，表示千歲好像朝這附近的廟宇離開。
+你詢問古厝的老闆，表示千歲好像離開去了這附近的廟宇。
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
 千歲到底去哪裡了？
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第五章關卡1&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="98" name="第五章關卡1" tags="autosave center" position="4200,500" size="100,100">&lt;h1&gt;【關卡】千歲去哪裡？&lt;/h1&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="98" name="第五章關卡1" tags="autosave center" position="4200,600" size="100,100">&lt;h1&gt;【關卡】千歲去哪裡？&lt;/h1&gt;
 
-千歲前往的廟宇是什麼？
+@@color:crimson;千歲到底去了哪間廟宇？@@
+根據@@color:green;遊戲摺頁的地圖@@，找出「海漾風華」附近的廟宇。
+
 
 &lt;&lt;linkreplace &#39;輸入千歲前往廟宇的名稱。&#39;&gt;&gt;
 &lt;div id=&#39;supportercode-form&#39;&gt;\
@@ -5469,63 +5549,68 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;if $story is 6&gt;&gt;\
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
-&lt;i&gt;「因為我的心軟，才會導致整個天地門堂口的消失⋯⋯我今天就是要修復被無支岐破壞，關於精怪之王的封印，你願意幫助我嗎？」&lt;/i&gt;&lt;/div&gt;
+&lt;i&gt;「因為我的心軟，才會導致整個天地門堂口的消失⋯⋯我今天就是要修復被吳支岐破壞，關於精怪之王的封印，你願意幫助我嗎？」&lt;/i&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 7&gt;&gt;\
 你點點頭，從千歲手中接過三老爺宮的「廟鑰」。
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第五章關卡2&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="101" name="第五章關卡2" tags="autosave center" position="4200,600" size="100,100">&lt;h1&gt;【關卡】修復精怪之王的封印&lt;/h1&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="101" name="第五章關卡2" tags="autosave center" position="4200,700" size="100,100">&lt;h1&gt;【關卡】修復精怪之王的封印&lt;/h1&gt;
 
-@@color:crimson;三老爺宮兩側的花神出現在你面前，告訴你必須用「刀」解開花神機關，重新封印「精怪之王」。@@
-千歲告訴你，依照花神所處的朝代分類，這樣就能啟動花神機關。
+@@color:crimson;你拿著廟鑰，發現廟前的石碑隱隱發著光。@@
+石碑上的文字就是啟動的密令，將廟鑰靠近石碑後並說出密令，就能開始修復封印。
 
-&lt;&lt;linkreplace &#39;啟動花神機關&#39;&gt;&gt;\
-    //請選擇每朵花花神所屬的朝代//&lt;&lt;set _select = [&quot;春秋&quot;, &quot;漢朝&quot;, &quot;晉朝&quot;, &quot;唐朝&quot;, &quot;宋朝&quot;, &quot;明朝&quot;]&gt;&gt;
-    梅　花：&lt;&lt;listbox &quot;$select1&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    杏　花：&lt;&lt;listbox &quot;$select2&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    桃　花：&lt;&lt;listbox &quot;$select3&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    薔薇花：&lt;&lt;listbox &quot;$select4&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    石榴花：&lt;&lt;listbox &quot;$select5&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    荷　花：&lt;&lt;listbox &quot;$select6&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    鳳仙花：&lt;&lt;listbox &quot;$select7&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    桂　花：&lt;&lt;listbox &quot;$select8&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    菊　花：&lt;&lt;listbox &quot;$select9&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    芙蓉花：&lt;&lt;listbox &quot;$select10&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    山茶花：&lt;&lt;listbox &quot;$select11&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
-    蠟梅花：&lt;&lt;listbox &quot;$select12&quot;&gt;&gt;&lt;&lt;optionsfrom _select&gt;&gt;&lt;&lt;/listbox&gt;&gt;
+&lt;&lt;linkreplace &#39;輸入啟動密令&#39;&gt;&gt;\
+密令就是：國姓爺上陸@@color:red;ＸＸＸＸ@@之地。
+&lt;div id=&#39;supportercode-form&#39;&gt;\
+紅色部分的文字：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是頭暝安營&#39; autofocus&gt;&gt; \
+&lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
 &lt;&lt;button &#39;輸入&#39;&gt;&gt;
-&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;
-&lt;&lt;run Dialog.wiki(Story.get(&#39;第五章關卡2判斷&#39;).processText())&gt;&gt;
-&lt;&lt;run Dialog.open()&gt;&gt;
+	&lt;&lt;set _inputtext to _inputtext.trim()&gt;&gt;
+	&lt;&lt;if _inputtext is &#39;頭暝安營&#39;&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;密令正確，[[開始修復封印&gt;&gt;|第五章關卡3]]。&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;@@color:red;好像不是喔，再試一次？@@&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;\
+&lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="第五章3" tags="autosave center" position="4200,300" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;三老爺宮&#39;&gt;&gt;\
 &lt;h1&gt;【後日談】花神機關&lt;/h1&gt;
 
 &lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第五章3內文&#39;&gt;&gt;&lt;/div&gt;
 
 &lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第五章3內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="103" name="第五章3內文" tags="" position="4300,300" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
-&lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch5story_3.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
-你啟動了花神機關，你感覺到封印正在修復，但沒過多久，機關突然停止。
+你啟動了花神機關，接著天空傳來有人吟詩的聲音，氣勢磅礡：
+
+&lt;em&gt;開闢荊榛逐荷夷，十年始克復先基。
+田橫尚有三千客，茹苦間關不忍離。&lt;/em&gt;
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 2&gt;&gt;\
-從封印中鑽出一只龐大的觸角，難道就像無支岐口中所說的，精怪之王已經甦醒了⋯⋯
+詩歌吟罷，那人又說：「小拳師，本藩壯志未酬，臺灣的未來就靠你了。」
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $story is 3&gt;&gt;\
+&lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch5story_3.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
+你感覺到封印正在修復，但沒過多久，機關突然停止。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 4&gt;&gt;\
+從封印中鑽出一只龐大的觸角，難道就像無支岐口中所說的，精怪之王已經甦醒了⋯⋯
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 5&gt;&gt;\
 &lt;span id=&#39;storyimg&#39;&gt;&lt;&lt;htmlimg &quot;ch5story_4.jpg&quot; &quot;70%&quot;&gt;&gt;&lt;/span&gt;
 你和千歲站起身，擺出拳師獨有的架式，朝向那未知的觸角，發出怒吼。
+
 怒吼聲中，一切都化為模糊。
+
 （未完待續）
 &lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;遊戲預告&#39; &#39;預告&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="104" name="預告" tags="autosave center" position="4500,100" size="100,100">&lt;h1&gt;【預告】&lt;/h1&gt;
 
 @@.delayed;精怪之王的甦醒迫在眉睫⋯⋯@@
-
 @@.delayed;你和千歲必須找到其他天地門的堂口，重修封印。@@
 
 @@.delayed;但⋯⋯事實上卻不是你想得如此簡單。@@
 
-@@.delayed;2024年，府城謎拳系列第二集。
-拳師，立於府城！@@
+@@.delayed;2024年，府城謎拳系列第二集。@@
+@@.delayed;拳師，立於府城！@@
 
 @@.delayed;&lt;span style=&#39;color:red;&#39;&gt;【遊戲結束，感謝您的遊玩】&lt;/span&gt;@@</tw-passagedata><tw-passagedata pid="105" name="序章0-2" tags="bg1 center notran nofooter" position="1100,100" size="100,100">&lt;&lt;run clearContent(&quot;decoration-separator&quot;)&gt;&gt;
 &lt;&lt;timed 1s t8n&gt;&gt;&lt;span style=&#39;background-color:rgb(55 113 224 / 83%);&#39;&gt;拳師&lt;/span&gt;
@@ -5598,11 +5683,11 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 	&lt;&lt;button &#39;繼續&#39; &#39;片刻休息3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;set $sequel to true&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;/span&gt;</tw-passagedata><tw-passagedata pid="112" name="第三章關卡1判斷" tags="" position="2800,500" size="100,100">&lt;&lt;if $class1 is &#39;4&#39; and $class2 is &#39;1&#39; and $class3 is &#39;5&#39; and $class4 is &#39;2&#39; and $class5 is &#39;3&#39;&gt;&gt;
+&lt;/span&gt;</tw-passagedata><tw-passagedata pid="112" name="第三章關卡1判斷" tags="" position="2800,700" size="100,100">&lt;&lt;if $class1 is &#39;4&#39; and $class2 is &#39;1&#39; and $class3 is &#39;5&#39; and $class4 is &#39;2&#39; and $class5 is &#39;3&#39;&gt;&gt;
 排列正確，成功找出齊天大聖被封印的地點！&lt;br&gt;&lt;br&gt;&lt;&lt;link &#39;繼續&gt;&gt;&#39; &#39;第三章2&#39;&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
 排列錯誤，再試一次？(正確答案是：4、1、5、2、3)
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="第三章關卡2.5" tags="autosave center" position="2700,700" size="100,100">&lt;h1&gt;【關卡】解開神祕聲音的封印&lt;/h1&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="第三章關卡2.5" tags="autosave center" position="2700,900" size="100,100">&lt;h1&gt;【關卡】解開神祕聲音的封印&lt;/h1&gt;
 
 &lt;div id=&quot;speech&quot;&gt;\
 &lt;&lt;htmlimg &quot;神祕的聲音.png&quot; &quot;50%&quot;&gt;&gt;
@@ -5621,7 +5706,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;\
 &lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
-&lt;/div&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="第三章關卡2-1" tags="autosave center" position="2800,600" size="100,100">&lt;&lt;set $random to random(1,5)&gt;&gt;
+&lt;/div&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="第三章關卡2-1" tags="autosave center" position="2800,800" size="100,100">&lt;&lt;set $random to random(1,5)&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;map name=&quot;infographic&quot;&gt;
         &lt;area target=&quot;&quot; alt=&quot;木&quot; title=&quot;木&quot;  onclick=&quot;$.wiki(&#39;&lt;&lt;goto &amp;quot;第三章關卡2判斷&amp;quot;&gt;&gt;&lt;&lt;set $number to  &amp;quot;3&amp;quot;&gt;&gt;&#39;)&quot; coords=&quot;38,200,85,239&quot; shape=&quot;rect&quot; /&gt;
@@ -5633,7 +5718,11 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
     &lt;div class=&quot;resizable imageMapObserve&quot; style=&quot;width: 300px;&quot;&gt;
         &lt;img usemap=&quot;#infographic&quot; alt=&quot;影像地圖&quot; @src=&quot;setup.ImagePath+&#39;五指山&#39;+ $random +&#39;.jpg&#39;&quot; /&gt;
     &lt;/div&gt;
+<<<<<<< Updated upstream
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="第三章關卡2判斷" tags="center" position="2900,600" size="100,100">&lt;&lt;if $number == $random&gt;&gt;
+=======
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="第三章關卡2判斷" tags="center" position="2900,800" size="100,100">&lt;&lt;if $number == $random&gt;&gt;
+>>>>>>> Stashed changes
 擊中弱點，解開封印！&lt;br&gt;&lt;br&gt;&lt;&lt;link &#39;繼續&gt;&gt;&#39; &#39;第三章關卡2.5&#39;&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
 弱點錯誤，再試一次？&lt;br&gt;&lt;br&gt;&lt;&lt;link &#39;返回&gt;&gt;&#39; &#39;第三章關卡2-1&#39;&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -5644,7 +5733,7 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
     &lt;i&gt;「受死吧！」&lt;/i&gt;
 &lt;/div&gt;
 
-&lt;em&gt;選擇攻擊的藥材&lt;/em&gt;
+&lt;em&gt;選擇服用的藥材&lt;/em&gt;
 &lt;&lt;link &#39;兒茶&#39;&gt;&gt;&lt;&lt;set $med to &#39;1&#39;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;&lt;&lt;run Dialog.wiki(Story.get(&#39;第四章關卡2判斷&#39;).processText())&gt;&gt;&lt;&lt;run Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &#39;血竭&#39;&gt;&gt;&lt;&lt;set $med to &#39;2&#39;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;&lt;&lt;run Dialog.wiki(Story.get(&#39;第四章關卡2判斷&#39;).processText())&gt;&gt;&lt;&lt;run Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &#39;冰片&#39;&gt;&gt;&lt;&lt;set $med to &#39;3&#39;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;結果&quot;)&gt;&gt;&lt;&lt;run Dialog.wiki(Story.get(&#39;第四章關卡2判斷&#39;).processText())&gt;&gt;&lt;&lt;run Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -5654,7 +5743,11 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 &lt;&lt;else&gt;&gt;
 弱點錯誤，再試一次？
 (木剋土，土剋水，水剋火，火剋金，金剋木)
+<<<<<<< Updated upstream
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="第五章關卡2判斷" tags="" position="4300,600" size="100,100">&lt;&lt;if $select1 is &#39;宋朝&#39; and $select2 is &#39;唐朝&#39; and $select3 is &#39;宋朝&#39; and $select4 is &#39;漢朝&#39; and $select5 is &#39;唐朝&#39; and $select6 is &#39;春秋&#39; and $select7 is &#39;晉朝&#39; and $select8 is &#39;晉朝&#39; and $select9 is &#39;晉朝&#39; and $select10 is &#39;明朝&#39; and $select11 is &#39;唐朝&#39; and $select12 is &#39;宋朝&#39;&gt;&gt;
+=======
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="第五章關卡2判斷" tags="" position="4300,700" size="100,100">&lt;&lt;if $select1 is &#39;宋朝&#39; and $select2 is &#39;唐朝&#39; and $select3 is &#39;宋朝&#39; and $select4 is &#39;漢朝&#39; and $select5 is &#39;唐朝&#39; and $select6 is &#39;春秋&#39; and $select7 is &#39;晉朝&#39; and $select8 is &#39;晉朝&#39; and $select9 is &#39;晉朝&#39; and $select10 is &#39;明朝&#39; and $select11 is &#39;唐朝&#39; and $select12 is &#39;宋朝&#39;&gt;&gt;
+>>>>>>> Stashed changes
 排列正確，成功啟動機關！&lt;br&gt;&lt;br&gt;&lt;&lt;link &#39;繼續&gt;&gt;&#39; &#39;第五章3&#39;&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
 排列錯誤，再試一次？(正確答案是：宋朝、唐朝、宋朝、漢朝、唐朝、春秋、晉朝、晉朝、晉朝、明朝、唐朝、宋朝)
@@ -5857,6 +5950,182 @@ Llogo.png</tw-passagedata><tw-passagedata pid="85" name="第五章1" tags="autos
 
 千歲說，這一定就是保生大帝的暗示，指靈籤的第四十二首與真相有關。
 [[確認靈籤第四十二首的內容&gt;&gt;|第四章關卡1-19]]
+<<<<<<< Updated upstream
+=======
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="第三章4" tags="autosave center" position="2700,400" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;開基靈祐宮&#39;&gt;&gt;
+&lt;h1&gt;【第三章】府城的猴子&lt;/h1&gt;
+
+&lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第三章4內文&#39;&gt;&gt;&lt;/div&gt;
+
+&lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第三章4內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="135" name="第三章4內文" tags="" position="2800,400" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
+你和千歲前往開基靈祐宮。
+
+你們一到開基靈祐宮，發現只有玄天上帝的神像坐在廟中。
+
+&lt;div id=tips&gt;&lt;span class=tipstitle&gt;&lt;strong&gt;【小故事：玄天上帝的通天冠】&lt;/strong&gt;&lt;/span&gt;
+在許丙丁的《小封神》的開頭，就是一尊玄天上帝來到府城任職，發現府城鷲嶺（今府城中和境鷲嶺北極殿大上帝）已經有另一尊玄天上帝了，於是祂只好在赤崁樓附近的廟宇任職（今開基靈祐宮）。由於廟宇運行需要資金，所以玄天上帝將自己的通天冠交給手下康、趙元帥，希望他們走到附近的當鋪典當通天冠。
+
+沒想到康、趙元帥卻將通天冠當成賭資，和天后宮的順風耳、千里眼賭博，希望藉此賺得資金。沒想到卻輸了一屁股債，而府城的各路神明也逐漸捲入這場糾紛之中……
+
+但歷史上的靈祐宮於永曆年間已經建立，故有「開基」二字，也是當地人的重要信仰。許丙丁創作《小封神》，是向府城的神明致敬之作。
+&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 2&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「上帝爺在嗎？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 3&gt;&gt;\
+千歲喊了好幾聲，都無人回應。
+
+你擔心這裡該不會也被清兵……
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 4&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「有可能，難怪康元帥沒有過來。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 5&gt;&gt;\
+這時通天冠正發著光，你猜測神像頭上沒戴任何東西，或許可以把通天冠放上去。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 6&gt;&gt;\
+你跟師姐將通天冠放上去，卻沒有發生任何事情。
+
+你們發現大門上的「靈祐宮」，其中「靈」正隱隱發光。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 7&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「師弟你看，「靈」字中間的三個口，最左邊的口在發光。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 8&gt;&gt;\
+你好奇這到底暗示甚麼呢？
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 9&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「我想想……師弟，你走到廟的正面，不覺得這三個口是對應廟的三個大門嗎？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 10&gt;&gt;\
+你跟師姐來到最左邊的入口，看到一個木牌。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 11&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「師弟，你看一下，這裡有個解說廟宇改建歷史的木牌？或許通天冠擺放位置的暗示就在上面。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 12&gt;&gt;\
+你看著木牌，仔細思考內容中關於方位的說明。
+&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;挑戰關卡&#39; &#39;第三章關卡3&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="136" name="第三章5" tags="autosave center" position="2700,500" size="100,100">&lt;&lt;set $story to 1&gt;&gt;&lt;&lt;set $location to &#39;開基靈祐宮&#39;&gt;&gt;
+&lt;h1&gt;【第三章】府城的猴子&lt;/h1&gt;
+
+&lt;div id=&#39;story&#39;&gt;&lt;&lt;include &#39;第三章5內文&#39;&gt;&gt;&lt;/div&gt;
+
+&lt;span id=&#39;storylink&#39;&gt;&lt;&lt;link &#39;繼續&amp;gt;&amp;gt;&#39;&gt;&gt;&lt;&lt;set $story to $story + 1&gt;&gt;&lt;&lt;replace &#39;#story&#39;&gt;&gt;&lt;&lt;include &#39;第三章5內文&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="137" name="第三章5內文" tags="" position="2800,500" size="100,100">&lt;&lt;if $story is 1&gt;&gt;\
+你們調整完之後，突然聽到一個聲音。
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 2&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;玄天上帝.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「是汝將吾解救出來嗎？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 3&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「（和你一起）上帝爺好！」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 4&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;玄天上帝.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「唉，可惜我遭奸人陷害，他竟然串通清兵，用咒術將我封印，擄走我的兵將。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 5&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「上帝爺，敢問對方是？」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 6&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;玄天上帝.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「天地門掌門陳天南。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 7&gt;&gt;\
+你問上帝爺他們又跑到哪裡去了？
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 8&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;玄天上帝.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「我依稀記得他們說要去興濟宮，那裡有一座清廷的官廳。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 9&gt;&gt;\
+&lt;div id=&quot;speech&quot;&gt;\
+&lt;&lt;htmlimg &quot;千歲.png&quot; &quot;50%&quot;&gt;&gt;
+&lt;i&gt;「師弟，走，我們趕快去興濟宮。」&lt;/i&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if $story is 10&gt;&gt;\
+你和千歲動身前往「興濟宮」。
+&lt;&lt;replace &#39;#storylink&#39;&gt;&gt;&lt;&lt;button &#39;前往興濟宮&#39; &#39;片刻休息0&#39;&gt;&gt;&lt;&lt;set $restchoice to &#39;2&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="138" name="第五章關卡3" tags="autosave center" position="4200,825" size="100,100">&lt;h1&gt;【關卡】修復精怪之王的封印&lt;/h1&gt;
+
+@@color:crimson;天空傳來一道聲音：「本藩乃大明天子賜姓的朱成功，用了此物鎮壓精怪，汝需配合廟裡的花神，依照時序啟動鎮壓精怪的機關。」@@
+
+修復封印的第一道程序，要找到@@color:red;國姓爺上陸月分@@的花神來配合。
+
+&lt;&lt;linkreplace &#39;輸入花神姓名&#39;&gt;&gt;\
+&lt;div id=&#39;supportercode-form&#39;&gt;\
+@@color:red;國姓爺上陸月分@@的花神：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是張麗華&#39; autofocus&gt;&gt; \
+&lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
+&lt;&lt;button &#39;輸入&#39;&gt;&gt;
+	&lt;&lt;set _inputtext to _inputtext.trim()&gt;&gt;
+	&lt;&lt;if _inputtext is &#39;張麗華&#39;&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;輸入正確，[[繼續修復封印&gt;&gt;|第五章關卡4]]。&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;@@color:red;好像不是喔，再試一次？@@&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;\
+&lt;/div&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="第五章關卡4" tags="autosave center" position="4200,950" size="100,100">&lt;h1&gt;【關卡】修復精怪之王的封印&lt;/h1&gt;
+
+@@color:crimson;石碑上的文字有變，出現「東海長鯨」四字。@@
+
+鄭成功被視為鯨魚的轉世，看來修復封印的第二道程序，要找到@@color:red;其出生月分@@的花神來配合。
+
+&lt;&lt;linkreplace &#39;輸入花神姓名&#39;&gt;&gt;\
+&lt;div id=&#39;supportercode-form&#39;&gt;\
+@@color:red;鄭成功出生月分@@的花神：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是石崇&#39; autofocus&gt;&gt; \
+&lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
+&lt;&lt;button &#39;輸入&#39;&gt;&gt;
+	&lt;&lt;set _inputtext to _inputtext.trim()&gt;&gt;
+	&lt;&lt;if _inputtext is &#39;石崇&#39;&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;輸入正確，[[繼續修復封印&gt;&gt;|第五章關卡5]]。&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;@@color:red;好像不是喔，再試一次？@@&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;\
+&lt;/div&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="140" name="第五章關卡5" tags="autosave center" position="4200,1075" size="100,100">&lt;h1&gt;【關卡】修復精怪之王的封印&lt;/h1&gt;
+
+@@color:crimson;石碑上的文字有變，出現「歸東即逝」四字。@@
+
+鄭成功逝世之後，有部屬夢見鄭成功騎著鯨魚離去。
+看來修復封印的第三道程序，要找到@@color:red;其逝世月分@@的花神來配合。
+
+&lt;&lt;linkreplace &#39;輸入花神姓名&#39;&gt;&gt;\
+&lt;div id=&#39;supportercode-form&#39;&gt;\
+@@color:red;鄭成功逝世月分@@的花神：&lt;&lt;textbox &#39;_inputtext&#39; &#39;正確答案是鐘馗&#39; autofocus&gt;&gt; \
+&lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
+&lt;&lt;button &#39;輸入&#39;&gt;&gt;
+	&lt;&lt;set _inputtext to _inputtext.trim()&gt;&gt;
+	&lt;&lt;if _inputtext is &#39;鐘馗&#39;&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;輸入正確，[[完成封印&gt;&gt;|第五章3]]。&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;@@color:red;好像不是喔，再試一次？@@&lt;&lt;/replace&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;\
+&lt;/div&gt;
+>>>>>>> Stashed changes
 &lt;&lt;/linkreplace&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
