@@ -895,7 +895,22 @@ body.slideWin {
 .shake {
 	display: inline-block;
 }
-/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript"><!-- 匯入google字體(使用webfont loader)：思源黑體、思源宋體 -->
+/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript"><!-- 置入google分析 -->
+/* 在<head>元素中置入google分析的script程式碼 */
+// 創建 <script> 元素
+var scriptElement = document.createElement("script");
+// 設置 <script> 元素的屬性
+scriptElement.async = true;
+scriptElement.src = "https://www.googletagmanager.com/gtag/js?id=G-TC5F9Q4TTX"; //替換成自己專案的GA追蹤碼
+// 創建用於嵌入代碼的 <script> 元素
+var codeElement = document.createElement("script");
+// 設置 <script> 元素的內容
+codeElement.innerHTML = "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-TC5F9Q4TTX');";
+// 將 <script> 元素添加到 <head> 元素中
+document.head.appendChild(scriptElement);
+document.head.appendChild(codeElement);
+
+<!-- 匯入google字體(使用webfont loader)：思源黑體、思源宋體 -->
 importScripts("https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
   .then(function () {
     // Code that depends on the script goes here.
