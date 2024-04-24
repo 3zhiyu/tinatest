@@ -2771,22 +2771,22 @@ Macro.add(&#39;message&#39;, {
 &lt;div id=&quot;numlock&quot;&gt;\
 @@color:DarkBlue;TYPE Password IN@@
 &lt;&lt;nobr&gt;&gt;
-	&lt;&lt;textbox &quot;$numlock&quot; &quot;0&quot; [[判定結果的Passage]]&gt;&gt;
+	&lt;&lt;textbox &quot;$numlock&quot; &quot;0&quot; [[判定結果的passage]]&gt;&gt;
 	&lt;&lt;set _keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, &quot;C&quot;, 0, &quot;E&quot;]&gt;&gt;
 	&lt;&lt;set _txt = &quot;&lt;table id=&#39;numpad&#39;&gt;&lt;tr&gt;&quot;&gt;&gt;
 	&lt;&lt;for _i = 0; _i &lt; _keys.length; _i++&gt;&gt;
 		&lt;&lt;if typeof _keys[_i] === &quot;number&quot;&gt;&gt;
 			/* Create the number buttons. */
 			&lt;&lt;set _txt += &#39;&lt;td&gt;&lt;&lt;button &quot;&#39; + _keys[_i] + &#39;&quot;&gt;&gt;&#39;&gt;&gt;
-			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-doorkey&quot;).val((parseInt($numlock, 10) * 10) + &#39; + _keys[_i] + &#39;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
+			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-numlock&quot;).val((parseInt($numlock, 10) * 10) + &#39; + _keys[_i] + &#39;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
 		&lt;&lt;elseif _keys[_i] === &quot;E&quot;&gt;&gt;
 			/* Create the ENTER button. */
 			&lt;&lt;set _txt += &quot;&lt;td title=\&quot;Enter\&quot;&gt;&lt;&lt;button &#39;&lt;span style=\&quot;font-size: 12px;\&quot;&gt;◄┘&lt;/span&gt;&#39;&gt;&gt;&quot;&gt;&gt;
-			&lt;&lt;set _txt += &#39;&lt;&lt;goto &quot;判定結果的Passage&quot;&gt;&gt;&lt;/td&gt;&#39;&gt;&gt;
+			&lt;&lt;set _txt += &#39;&lt;&lt;goto &quot;判定結果的passage&quot;&gt;&gt;&lt;/td&gt;&#39;&gt;&gt;
 		&lt;&lt;else&gt;&gt;
 			/* Create the CLEAR button. */
 			&lt;&lt;set _txt += &#39;&lt;td title=\&quot;Clear\&quot;&gt;&lt;&lt;button &quot;C&quot;&gt;&gt;&#39;&gt;&gt;
-			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-doorkey&quot;).val(&quot;0&quot;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
+			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-numlock&quot;).val(&quot;0&quot;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 		&lt;&lt;set _txt += &#39;&lt;&lt;/button&gt;&gt;&lt;/td&gt;&#39;&gt;&gt;	
 		&lt;&lt;if !((_i + 1) % 3) &amp;&amp; (_i &lt; 11)&gt;&gt;
@@ -5753,7 +5753,7 @@ animate__faster  → 動畫變超快(變成500毫秒)
 		&lt;&lt;if typeof _keys[_i] === &quot;number&quot;&gt;&gt;
 			/* Create the number buttons. */
 			&lt;&lt;set _txt += &#39;&lt;td&gt;&lt;&lt;button &quot;&#39; + _keys[_i] + &#39;&quot;&gt;&gt;&#39;&gt;&gt;
-			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-doorkey&quot;).val((parseInt($numlock, 10) * 10) + &#39; + _keys[_i] + &#39;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
+			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-numlock&quot;).val((parseInt($numlock, 10) * 10) + &#39; + _keys[_i] + &#39;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
 		&lt;&lt;elseif _keys[_i] === &quot;E&quot;&gt;&gt;
 			/* Create the ENTER button. */
 			&lt;&lt;set _txt += &quot;&lt;td title=\&quot;Enter\&quot;&gt;&lt;&lt;button &#39;&lt;span style=\&quot;font-size: 12px;\&quot;&gt;◄┘&lt;/span&gt;&#39;&gt;&gt;&quot;&gt;&gt;
@@ -5761,7 +5761,7 @@ animate__faster  → 動畫變超快(變成500毫秒)
 		&lt;&lt;else&gt;&gt;
 			/* Create the CLEAR button. */
 			&lt;&lt;set _txt += &#39;&lt;td title=\&quot;Clear\&quot;&gt;&lt;&lt;button &quot;C&quot;&gt;&gt;&#39;&gt;&gt;
-			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-doorkey&quot;).val(&quot;0&quot;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
+			&lt;&lt;set _txt += &#39;&lt;&lt;run $(&quot;#textbox-numlock&quot;).val(&quot;0&quot;).trigger(&quot;change&quot;)&gt;&gt;&#39;&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 		&lt;&lt;set _txt += &#39;&lt;&lt;/button&gt;&gt;&lt;/td&gt;&#39;&gt;&gt;	
 		&lt;&lt;if !((_i + 1) % 3) &amp;&amp; (_i &lt; 11)&gt;&gt;
@@ -5770,7 +5770,8 @@ animate__faster  → 動畫變超快(變成500毫秒)
 	&lt;&lt;/for&gt;&gt;
 	&lt;&lt;set _txt += &quot;&lt;/tr&gt;&lt;/table&gt;&quot;&gt;&gt;
 	_txt
-&lt;&lt;/nobr&gt;&gt;&lt;/div&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;/div&gt;
 @@color:green;輸入密碼後，點擊&quot;◄┘&quot;送出。如果輸入錯字，可點擊&quot;C&quot;清除。@@
  &lt;em&gt;@@color:red;正確密碼：258789@@&lt;/em&gt;
  
