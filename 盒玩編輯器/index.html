@@ -164,14 +164,18 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
   flex-direction: column;
   height: 90vh;
 }
 
 li.editorbutton {
+  position: relative;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
+  justify-content: center;
+  bottom: 10px;
 }
 li.editorbutton button {
   margin: 0 5px;
@@ -218,13 +222,17 @@ li.down {
   }
 
   li.down {
-    margin-top: 385px; /* 確保下方內容不被固定區塊遮擋 */
-    height: calc(100vh - 385px); /* 動態計算高度 */
+    margin-top: 400px; /* 確保下方內容不被固定區塊遮擋 */
+    height: calc(100vh - 400px); /* 動態計算高度 */
   }
 }
 
 /* 電腦平台：橫向排列 */
 @media (min-width: 1025px) {
+  #story {
+    margin-left: 0;
+  }
+  
   #passages ul {
     flex-direction: row;
   }
@@ -246,7 +254,9 @@ li.down {
     height: 90vh; /* 固定高度 */
     overflow-y: auto; /* 允許內部垂直滾動 */
   }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 初始隱藏盒玩成果 */
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">UIBar.hide();
+
+/* 初始隱藏盒玩成果 */
 $(document).ready(function() {
   // 選擇所有id中包含"result"的元素，並添加hide class
   $("[id*='result']").addClass("hide");
@@ -537,14 +547,13 @@ Macro.add('captureScreen', {
       document.body.removeChild(overlay);
     });
   }
-});</script><tw-passagedata pid="1" name="start" tags="" position="800,325" size="100,100">&lt;ul&gt;&lt;li class=&#39;up&#39;&gt;&lt;div id=&#39;editorshow&#39;&gt;&lt;&lt;include &#39;editorresult&#39;&gt;&gt;&lt;/div&gt;
-&lt;li class=&#39;editorbutton&#39;&gt;&lt;&lt;button &#39;儲存&#39;&gt;&gt;
+});</script><tw-passagedata pid="1" name="start" tags="" position="800,325" size="100,100">&lt;ul&gt;&lt;li class=&#39;up&#39;&gt;&lt;div id=&#39;editorshow&#39;&gt;&lt;&lt;include &#39;editorresult&#39;&gt;&gt;&lt;li class=&#39;editorbutton&#39;&gt;&lt;&lt;button &#39;儲存盒玩&#39;&gt;&gt;
   &lt;&lt;run showresult()&gt;&gt;
   &lt;&lt;run addtext()&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 &lt;&lt;button &#39;下載圖片&#39;&gt;&gt;
   &lt;&lt;captureScreen &quot;#editorshow&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;&lt;/li&gt;
+&lt;&lt;/button&gt;&gt;&lt;/li&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;li  class=&#39;down&#39;&gt;\
 姓　　名：&lt;&lt;textbox &#39;$name&#39; &#39;輸入文字&#39; autofocus&gt;&gt; 
@@ -578,7 +587,7 @@ Macro.add('captureScreen', {
 &lt;/li&gt;&lt;/ul&gt;</tw-passagedata><tw-passagedata pid="2" name="editorresult" tags="nobr" position="200,300" size="100,100">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --&gt;
 &lt;svg version=&quot;1.1&quot; id=&quot;圖層_1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; x=&quot;0px&quot; y=&quot;0px&quot;
-	 viewBox=&quot;0 0 743 861&quot; style=&quot;enable-background:new 0 0 743 861;&quot; xml:space=&quot;preserve&quot;&gt;
+	 viewBox=&quot;0 0 743 790&quot; style=&quot;enable-background:new 0 0 743 790;&quot; xml:space=&quot;preserve&quot;&gt;
 &lt;style type=&quot;text/css&quot;&gt;
 	.st0{clip-path:url(#SVGID_2_);}
 	.st1{fill:#4748ED;}
