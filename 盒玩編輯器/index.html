@@ -443,7 +443,7 @@ Macro.add('captureScreen', {
       alert("請選擇所有選項的物件再進行下載");
       return; // 停止代碼運行
     }
-    
+
     var screenID = this.args[0] || "#screen"; // 預設id為#screen的<div>區塊
     var container = document.querySelector(screenID);
 
@@ -528,7 +528,7 @@ Macro.add('captureScreen', {
 
     // 等待所有圖片轉換完成後再截圖
     Promise.all(promises).then(() => {
-      html2canvas(container, { useCORS: true }).then(canvas => {
+      html2canvas(container, { useCORS: true, scale: 2 }).then(canvas => { // 增加縮放比例
         var image = canvas.toDataURL("image/png");
         var fileName = "screenshot_" + Date.now() + ".png";
         var link = document.createElement("a");
