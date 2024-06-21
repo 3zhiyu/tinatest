@@ -462,6 +462,7 @@ Macro.add('captureScreen', {
     overlay.style.zIndex = '1000';
     overlay.innerText = '產生圖片中...';
     document.body.appendChild(overlay);
+    $("#editorbutton").addClass("hide");
 
     // 將背景圖片轉換為Data URI
     function convertBackgroundImageToDataURI(element) {
@@ -535,6 +536,7 @@ Macro.add('captureScreen', {
         link.download = fileName;
         link.click();
         // 移除覆蓋層
+        $("#editorbutton").removeClass("hide");
         document.body.removeChild(overlay);
       }).catch(err => {
         console.error('截圖失敗:', err);
