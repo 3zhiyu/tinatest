@@ -422,8 +422,36 @@ importScripts("https://html2canvas.hertzen.com/dist/html2canvas.js")
 // 新增自訂巨集<<captureScreen>>
 Macro.add('captureScreen', {
   handler: function() {
+    // 獲取Twine變數的值
+    var npcValue = variables().npc;
+    var shopValue = variables().shop;
+    var productValue = variables().product;
+    var boxValue = variables().boxcolor;
+
+    // 檢查是否有未選擇的項目
+    if (!npcValue || !shopValue || !productValue || !boxValue) {
+      alert("請選擇所有選項的物件再進行儲存");
+      return; // 停止代碼運行
+    }
+    
     var screenID = this.args[0] || "#screen"; // 預設id為#screen的<div>區塊
     var container = document.querySelector(screenID);
+
+    // 創建一個覆蓋層來顯示提示文字
+    var overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.color = 'white';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '1000';
+    overlay.innerText = '產生圖片中...';
+    document.body.appendChild(overlay);
 
     // 將背景圖片轉換為Data URI
     function convertBackgroundImageToDataURI(element) {
@@ -436,16 +464,16 @@ Macro.add('captureScreen', {
         return fetch(imageUrl)
           .then(response => response.blob())
           .then(blob => {
-            return new Promise((resolve) => {
-              let reader = new FileReader();
-              reader.onloadend = function() {
-                let base64data = reader.result;
-                element.style.backgroundImage = `url(${base64data})`;
-                resolve();
-              }
-              reader.readAsDataURL(blob);
-            });
+          return new Promise((resolve) => {
+            let reader = new FileReader();
+            reader.onloadend = function() {
+              let base64data = reader.result;
+              element.style.backgroundImage = `url(${base64data})`;
+              resolve();
+            }
+            reader.readAsDataURL(blob);
           });
+        });
       }
       return Promise.resolve();
     }
@@ -454,34 +482,34 @@ Macro.add('captureScreen', {
     function convertSVGImagesToDataURI(svgElement) {
       var images = svgElement.querySelectorAll('image');
       var promises = [];
-      
+
       images.forEach(function(image) {
         var href = image.getAttribute('xlink:href') || image.getAttribute('href');
         if (href) {
           var promise = fetch(href)
-            .then(response => response.blob())
-            .then(blob => {
-              return new Promise((resolve) => {
-                let reader = new FileReader();
-                reader.onloadend = function() {
-                  let base64data = reader.result;
-                  image.setAttribute('xlink:href', base64data);
-                  resolve();
-                }
-                reader.readAsDataURL(blob);
-              });
+          .then(response => response.blob())
+          .then(blob => {
+            return new Promise((resolve) => {
+              let reader = new FileReader();
+              reader.onloadend = function() {
+                let base64data = reader.result;
+                image.setAttribute('xlink:href', base64data);
+                resolve();
+              }
+              reader.readAsDataURL(blob);
             });
+          });
           promises.push(promise);
         }
       });
-      
+
       return Promise.all(promises);
     }
 
     // 轉換所有背景圖片和SVG圖片
     var promises = [];
     promises.push(convertBackgroundImageToDataURI(container));
-    
+
     var svgElements = container.querySelectorAll('svg');
     svgElements.forEach(function(svgElement) {
       promises.push(convertSVGImagesToDataURI(svgElement));
@@ -496,12 +524,20 @@ Macro.add('captureScreen', {
         link.href = image;
         link.download = fileName;
         link.click();
+        // 移除覆蓋層
+        document.body.removeChild(overlay);
       }).catch(err => {
         console.error('截圖失敗:', err);
+        // 移除覆蓋層
+        document.body.removeChild(overlay);
       });
+    }).catch(err => {
+      console.error('圖片轉換失敗:', err);
+      // 移除覆蓋層
+      document.body.removeChild(overlay);
     });
   }
-});</script><tw-passagedata pid="1" name="start" tags="" position="800,325" size="100,100">&lt;ul&gt;&lt;li class=&#39;up&#39;&gt;&lt;div id=&#39;editorshow&#39;&gt;&lt;&lt;include &#39;editorresult&#39;&gt;&gt;&lt;/div&gt;
+});</script><tw-passagedata pid="1" name="start" tags="" position="800,325" size="100,100">&lt;ul&gt;&lt;li class=&#39;up&#39;&gt;&lt;div id=&#39;editorshow&#39;&gt;&lt;/div&gt;
 &lt;li class=&#39;editorbutton&#39;&gt;&lt;&lt;button &#39;儲存&#39;&gt;&gt;
   &lt;&lt;run showresult()&gt;&gt;
   &lt;&lt;run addtext()&gt;&gt;
