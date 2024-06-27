@@ -444,7 +444,6 @@ Macro.add('captureScreen', {
     var screenID = this.args[0] || "#screen"; // 預設id為#screen的<div>區塊
     var container = document.querySelector(screenID);
     var buttonDiv = document.getElementById('editorbutton');
-    var originalZIndex = buttonDiv.style.zIndex;
 
     // 創建一個覆蓋層來顯示提示文字
     var overlay = document.createElement('div');
@@ -473,16 +472,16 @@ Macro.add('captureScreen', {
         return fetch(imageUrl)
           .then(response => response.blob())
           .then(blob => {
-          return new Promise((resolve) => {
-            let reader = new FileReader();
-            reader.onloadend = function() {
-              let base64data = reader.result;
-              element.style.backgroundImage = `url(${base64data})`;
-              resolve();
-            }
-            reader.readAsDataURL(blob);
+            return new Promise((resolve) => {
+              let reader = new FileReader();
+              reader.onloadend = function() {
+                let base64data = reader.result;
+                element.style.backgroundImage = `url(${base64data})`;
+                resolve();
+              }
+              reader.readAsDataURL(blob);
+            });
           });
-        });
       }
       return Promise.resolve();
     }
@@ -491,41 +490,41 @@ Macro.add('captureScreen', {
     function convertSVGImagesToDataURI(svgElement) {
       var images = svgElement.querySelectorAll('image');
       var promises = [];
-
+      
       images.forEach(function(image) {
         var href = image.getAttribute('xlink:href') || image.getAttribute('href');
         if (href) {
           var promise = fetch(href)
-          .then(response => response.blob())
-          .then(blob => {
-            return new Promise((resolve) => {
-              let reader = new FileReader();
-              reader.onloadend = function() {
-                let base64data = reader.result;
-                image.setAttribute('xlink:href', base64data);
-                resolve();
-              }
-              reader.readAsDataURL(blob);
+            .then(response => response.blob())
+            .then(blob => {
+              return new Promise((resolve) => {
+                let reader = new FileReader();
+                reader.onloadend = function() {
+                  let base64data = reader.result;
+                  image.setAttribute('xlink:href', base64data);
+                  resolve();
+                }
+                reader.readAsDataURL(blob);
+              });
             });
-          });
           promises.push(promise);
         }
       });
-
+      
       return Promise.all(promises);
     }
 
     // 轉換所有背景圖片和SVG圖片
     var promises = [];
     promises.push(convertBackgroundImageToDataURI(container));
-
+    
     var svgElements = container.querySelectorAll('svg');
     svgElements.forEach(function(svgElement) {
       promises.push(convertSVGImagesToDataURI(svgElement));
     });
 
-    // 修改button區塊的z-index
-    buttonDiv.style.zIndex = '-5';
+    // 隱藏button區塊
+    buttonDiv.style.display = 'none';
 
     // 等待所有圖片轉換完成後再截圖
     Promise.all(promises).then(() => {
@@ -536,21 +535,21 @@ Macro.add('captureScreen', {
         link.href = image;
         link.download = fileName;
         link.click();
-        // 恢復button區塊的z-index
-        buttonDiv.style.zIndex = originalZIndex;
+        // 恢復button區塊的顯示
+        buttonDiv.style.display = '';
         // 移除覆蓋層
         document.body.removeChild(overlay);
       }).catch(err => {
         console.error('截圖失敗:', err);
-        // 恢復button區塊的z-index
-        buttonDiv.style.zIndex = originalZIndex;
+        // 恢復button區塊的顯示
+        buttonDiv.style.display = '';
         // 移除覆蓋層
         document.body.removeChild(overlay);
       });
     }).catch(err => {
       console.error('圖片轉換失敗:', err);
-      // 恢復button區塊的z-index
-      buttonDiv.style.zIndex = originalZIndex;
+      // 恢復button區塊的顯示
+      buttonDiv.style.display = '';
       // 移除覆蓋層
       document.body.removeChild(overlay);
     });
