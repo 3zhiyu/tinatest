@@ -1,0 +1,2563 @@
+:: StoryTitle
+文字為主響應式版型
+
+
+:: StoryData
+{
+  "ifid": "C2F70416-D44E-4965-BAC4-0347F1833ADF",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "start-menu",
+  "tag-colors": {
+    "chapter-intro": "yellow",
+    "game-start": "green",
+    "autosave": "orange"
+  },
+  "zoom": 1
+}
+
+
+:: PassageDone [noreturn nobr] {"position":"225,250","size":"100,100"}
+
+
+
+:: PassageFooter [nobr noreturn] {"position":"125,250","size":"100,100"}
+
+
+
+:: PassageHeader [noreturn nobr] {"position":"25,250","size":"100,100"}
+<<if settings.notifs>><<if tags().includes('autosave')>><<notify 3.5s>>自動存檔完成！<</notify>><</if>><</if>>
+
+/* autosaving --
+the autosave notif needs to be 'present' at all times so is stored in the passageheader, only popping up when you add the [autosave] tag onto one of your passages. 
+
+this is mainly for aesthetics as the autosave function is currently set up to save on EVERY passage. this can be changed in the javascript settings, e.g. you could configure it to only autosave on passages with the [autosave] tag 
+
+notify is also a ChapelR macro, not a default sugarcube macro, so make sure to familiarise yourself with the documentation!*/
+
+<script>
+    var myDiv = document.getElementById('passages');
+    myDiv.scrollTop = 0;
+</script>
+
+/* scroll top --
+    this script makes the page scroll back to the top every time you move on to the next passage -- do not delete it! 
+*/
+
+
+:: Start-splash [splash noreturn] {"position":"600,0","size":"100,100"}
+<<fadein 2s>><span class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Twine_vector_logo.svg/896px-Twine_vector_logo.svg.png">
+</span><</fadein>>
+
+<<timed 4s t8n>><span class="game-start-timed">
+    點擊任意處繼續...
+</span><</timed>>
+
+<<cont>><<goto 'start-menu'>><</cont>>
+
+
+:: StoryInit {"position":"125,400","size":"100,100"}
+/* comment --
+	this is where to set up your variables -- you can delete the examples below.
+
+	note that $chapter is used to change the chapter title in the title bar. you can either delete this, change the variable name, or change the variable(s) used entirely
+
+	note that $chapter and $name are also used for the autoname save function. you can either delete this, change the variable name, or change the variable(s) used entirely (in the Javascript file) 
+*/
+
+<<set $chapter = "">>
+<<set $name = "Unknown">>
+<<set $textbox = "textbox">>
+<<set $listbox = "listbox">>
+<<set $cycle = "cycle">>
+
+/* ChapelR Meter Macro set up */
+/* these stat meter set ups are purely examples and do not need to be used */
+
+<<set $friendly = 50>>
+<<set $max_friendly = 100>>
+
+<<newmeter 'Friendly' $friendly>>
+	<<colors '#777' '#777' '#333'>>
+    <<sizing '100%' '1.2em'>>
+<</newmeter>>
+
+<<set $strength = 50>>
+<<set $max_strength = 100>>
+
+<<newmeter 'Strength' $strength>>
+	<<colors '#777' '#777' '#333'>>
+    <<sizing '100%' '1.2em'>>
+<</newmeter>>
+
+
+:: StoryInterface {"position":"25,400","size":"100,100"}
+<div id="container">
+	<div id="header"></div>
+  	<div id="console">
+		<div id="title-bar" data-passage="title-bar"></div>
+		<div id="nav" class="fa-icons" data-passage="nav"></div>
+  		<div id="passages"></div>
+  	</div>
+  	<div id="footer"></div></div>
+</div>
+
+
+:: Widgets [widget noreturn nobr] {"position":"325,250","size":"100,100"}
+
+
+
+:: credits [credits noreturn] {"position":"150,125","size":"100,100"}
+<h2>Twine + Sugarcube</h2>
+<li>Twine by Chris Klimas - <a href="https://twinery.org/cookbook/" target="_blank">Twine Cookbook</a></li>
+<li>Sugarcube by Thomas Michael Edwards - <a href="https://www.motoslave.net/sugarcube/2/docs/" target="_blank">Sugarcube 2 Documentation</a></li>
+<li>Custom Macros - <a href="https://github.com/ChapelR/custom-macros-for-sugarcube-2" target="_blank">ChapelR Custom Macros Collection</a></li>
+
+<h2>Resources</h2>
+<li>Icons - <a href="https://fontawesome.com/" target="_blank"> Font Awesome Icons</a></li>
+<li>Fonts - <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>, <a href="https://opendyslexic.org/" target="_blank">Open Dyslexic</a></li>
+<li>CSS + HTML Tutorials - <a href="https://www.w3schools.com/">W3Schools</a></li>
+
+<h2>Disclaimer</h2>
+PROJECT TITLE is a work of fiction. Names, characters, places and incidents either are products of the author's imagination or are used fictitiously. Any resemblance to actual events or locales or persons, living or dead, is entirely coincidental.
+
+
+:: nav [noreturn nobr] {"position":"425,0","size":"100,100"}
+<<link '<i class="fa-solid fa-bookmark" alt="saves"></i>'>><<run UI.saves();>><</link>>
+
+<<link '<i class="fa-solid fa-gear" alt="settings"></i>'>><<run UI.settings();>><</link>>
+
+<<link '<i class="fa-solid fa-user" alt="profile"></i>'>>
+    <<script>>
+        Dialog.setup("profile","profile");
+        Dialog.wiki(Story.get("profile").processText());
+        Dialog.open();
+    <</script>>
+<</link>>
+
+<<link '<i class="fa-solid fa-arrow-rotate-left" alt="return"></i>'>><<run Engine.backward();>><</link>>
+
+<<link '<i class="fa-solid fa-door-open" alt="restart"></i>'>><<run UI.restart();>><</link>>
+
+
+:: p_00 {"position":"1125,300","size":"100,100"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend commodo urna, nec tincidunt urna malesuada eget. In venenatis blandit diam eu tincidunt. Aliquam odio nisl, accumsan ut blandit quis, dapibus quis magna. Suspendisse sed nulla in lorem laoreet rutrum. Donec et nisl sit amet libero bibendum viverra. Fusce venenatis libero eget ex malesuada scelerisque. Proin elementum placerat quam, nec molestie urna aliquam a. Sed pulvinar congue fermentum. Aliquam erat volutpat. Duis ullamcorper at elit vitae semper. Duis faucibus, nunc vitae tincidunt feugiat, dui libero ullamcorper leo, ut varius mauris arcu ac erat.
+
+Nullam sollicitudin tempor quam sit amet ultrices. Nullam et augue non ligula vestibulum bibendum. Integer sit amet ligula consectetur, scelerisque metus eu, dignissim dolor. Quisque commodo tempus interdum. Quisque porttitor lacus est, sit amet tincidunt nulla eleifend nec. Nam porttitor velit non auctor ultrices. Fusce luctus ipsum eget tristique pretium. Donec aliquam lacinia arcu, sit amet aliquet ex accumsan non. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras efficitur leo quis ipsum vestibulum, quis consectetur metus facilisis. Nulla faucibus est id pharetra facilisis. Cras euismod quam augue, sed sodales elit posuere ac.
+
+Cras tempor nisl in metus egestas lacinia. Ut semper ipsum quam, et lacinia erat blandit a. Nunc a ipsum et nisi aliquam euismod. Aenean condimentum nunc nec ex condimentum tempus. Pellentesque sagittis mi quis orci auctor, eget molestie orci placerat. Ut ultrices mauris elit, sed mollis justo posuere ut. In hac habitasse platea dictumst. Nullam a eros elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel augue lorem. Aliquam non purus vel metus congue rhoncus. Praesent et porttitor orci, quis venenatis urna. Mauris quis dui cursus, fringilla lorem vel, feugiat nunc. Nullam urna est, fermentum quis justo quis, vestibulum tincidunt lacus. Aenean sit amet consectetur felis, quis hendrerit enim.
+
+<<nobr>><div class="choices">
+	<div class="choice-item">[[Continue|p_01]]</div>
+	<div class="flirt-choice-item">[[Continue|p_02]]</div>
+	<div class="special-choice-item">[[Continue|p_01]]</div>
+</div><</nobr>>
+
+
+:: p_01 [autosave] {"position":"1250,300","size":"100,100"}
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+
+<<button "Button">><</button>>
+
+<<textbox "$textbox" $textbox>>
+
+<<listbox "$listbox">>
+	<<option "Listbox 1">>
+	<<option "Listbox 2">>
+	<<option "Listbox 3">>
+<</listbox>>
+
+<<cycle "$cycle">>
+	<<option "Cycling 1">>
+	<<option "Cycling 2">>
+	<<option "Cycling 3">>
+<</cycle>>
+
+<li>List Item</li>
+<li>List Item</li>
+<li>List Item</li>
+
+<<nobr>><div class="choices">
+	<div class="choice-item">[[Continue|p_00]]</div>
+	<div class="flirt-choice-item">[[Continue|p_00]]</div>
+	<div class="special-choice-item">[[Continue|p_00]]</div>
+</div><</nobr>>
+
+
+:: p_02 {"position":"1250,425","size":"100,100"}
+不會存檔
+
+<<return 返回>>
+
+
+:: profile [noreturn] {"position":"25,125","size":"100,100"}
+<h1>Profile</h1>
+
+Set up your profile, stats and meters, and other relevant information here!
+
+<div id="stat-title">
+    <span>Friendly ($friendly%)</span> 
+    <span>Stoic (<<print 100 - $friendly>>%)</span>
+</div>
+<<showmeter 'Friendly' `$friendly/ $max_friendly`>>
+
+<div id="stat-title">
+    <span>Strength ($strength%)</span>
+    <span>Weakness (<<print 100 - $strength>>%)</span>
+</div>
+<<showmeter 'Strength' `$strength/ $max_strength`>>
+
+
+:: selectmenu [start-menu noreturn] {"position":"725,125","size":"100,100"}
+<div id="start-title">選擇體驗關卡</div>
+
+<<nobr>><div id="start-menu">
+<<button "體驗一" "ch01_1">><<set $chapter to "體驗1名字">><</button>>
+<<button "體驗二" "ch02_1">><<set $chapter to "體驗2名字">><</button>>
+<<button "體驗三" "ch03_1">><<set $chapter to "體驗3名字">><</button>>
+</div><</nobr>>
+
+
+:: start-menu [start-menu noreturn] {"position":"600,125","size":"100,100"}
+<<fadein 1s>>
+    <div id="start-title"><<include '遊戲標題'>></div>
+    <div id="start-subtitle"><<include '遊戲副標題'>></div>
+    <<nobr>><div id="start-menu"><<include '遊戲開始選單'>></div><</nobr>>
+<</fadein>>
+
+
+:: title-bar [noreturn nobr] {"position":"325,0","size":"100,100"}
+<div id="title-container">
+    <span class="title-item"><<include '遊戲標題'>></span>
+    <span class="chapter-item">$chapter</span>
+</div>
+
+
+:: 遊戲副標題 {"position":"125,0","size":"100,100"}
+互動體驗
+
+
+:: 遊戲標題 {"position":"25,0","size":"100,100"}
+「移動·我城 — 港人的移動與追尋」特展
+
+
+:: 遊戲開始選單 [nobr] {"position":"225,0","size":"100,100"}
+<<nobr>><<if Save.autosave.ok() and Save.autosave.has()>><<button "繼續體驗">><<run Save.autosave.load()>><</button>><</if>><</nobr>>
+<<button "開始體驗" "selectmenu">><</button>>
+<<button "載入存檔">><<run UI.saves();>><</button>>
+<<button "設定">><<run UI.settings();>><</button>>
+<<button "特展資訊">>
+  <<script>>
+    Dialog.setup("credits","credits");
+    Dialog.wiki(Story.get("credits").processText());
+    Dialog.open();
+  <</script>>
+<</button>>
+
+
+:: StoryScript [script]
+/* IMPORT */
+/* comment -- 
+this fontawesome kit is what allows the icons to be used. you can visit fontawesome.com to look at other free icons you might want to use anywhere else in this template. 
+
+this fontawesome kit link is my own - i recommend signing up to fontawesome.com and generating your own kit so you can manage your own icons. fontawesome kits also allow for you to upload your own custom icons! replace the link below with your own and continue to use the icons as normal
+*/
+
+importScripts('https://kit.fontawesome.com/2d3e659fe4.js');
+// 匯入Animate.css
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+// WebFont Loader ：匯入google字型
+importScripts("https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
+	.then(function () {
+		/* Code that depends on the script goes here. */
+  		WebFont.load({
+      google: {
+        families: ["Noto Sans TC", "Noto Serif TC", "Yuji Syuku", "DotGothic16"]
+      }
+  });
+	})
+	.catch(function (err) {
+		/* There was an error loading the script, log it to the console. */
+		console.log(err);
+	});
+
+/* change localization template */
+
+/* comment --
+the localization template lists the defaults used for the settings, saves, restart, error labels etc.
+
+you are able to change the labels to whatever you want like below! e.g. instead of 'Save to Disk' (the default) i have changed it to 'Download Save'.
+
+if you search strings localization in the Sugarcube 2 Documentation, it will lead you to an explanation about localization and the template on github where all the labels are listed. you can take any of the labels, copy and paste them into your javascript file (here!), and change the labels.
+*/
+
+(function () {
+	/*******************************************************************************
+		General.
+	*******************************************************************************/
+
+	l10nStrings.textAbort = '終止';
+
+	l10nStrings.textAborting = '正在終止';
+
+	l10nStrings.textCancel = '取消';
+
+	l10nStrings.textClear = '清除';
+
+	l10nStrings.textClose = '關閉';
+
+	l10nStrings.textDelete = '刪除';
+
+	l10nStrings.textExport = '匯出';
+
+	// In lowercase, if possible.
+	l10nStrings.textIdentity = '遊戲';
+
+	l10nStrings.textImport = '匯入';
+
+	l10nStrings.textLoad = '載入';
+
+	l10nStrings.textOff = '關閉';
+
+	l10nStrings.textOk = '確認';
+
+	l10nStrings.textOn = '開啟';
+
+	l10nStrings.textSave = '儲存';
+
+	// (noun) chance to act (in a game), moment, period
+	l10nStrings.textTurn = '回合';
+
+
+	/*******************************************************************************
+		Errors.
+	*******************************************************************************/
+
+	// NOTE: `passage` is supplied locally.
+	l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在';
+
+
+	/*******************************************************************************
+		Warnings.
+	*******************************************************************************/
+
+	l10nStrings.warningNoStorage = '遺失可用的Storage APIs。可能的原因是禁用了第三方 Cookie 設置，這也會影響 Web Storage，或者使用了私密瀏覽模式。';
+
+	l10nStrings.warningNoWebStorage = '遺失Web Storage API，所以{textIdentity}在降級模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。';
+
+	l10nStrings.warningDegraded = '缺少支持 {textIdentity} 所需的功能，因此正在降級模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。';
+
+	l10nStrings.warningNoSaves = '缺少支持存檔所需的功能，因此本次體驗的存檔功能已被禁用。';
+
+
+	/*******************************************************************************
+		API: Save.
+	*******************************************************************************/
+
+	l10nStrings.saveErrorDisallowed = '在這個段落中不允許存檔';
+
+	l10nStrings.saveErrorDecodeFail = '無法解碼存檔文件，可能是因為存檔文件被損壞';
+
+	l10nStrings.saveErrorDiskLoadFail = '讀取存檔失敗';
+
+	l10nStrings.saveErrorIdMismatch = '儲存{textIdentity}是錯誤的';
+
+	l10nStrings.saveErrorInvalidData = '存檔缺少必須的數據，可能是因為存檔文件被損壞';
+
+	l10nStrings.saveErrorNonexistent = '存檔不存在';
+
+
+	/*******************************************************************************
+		Base UI.
+	*******************************************************************************/
+
+	l10nStrings.uiBarLabelToggle = '打開/關閉導航欄';
+
+	l10nStrings.uiBarLabelBackward = '回朔{textIdentity}的歷史紀錄';
+
+	l10nStrings.uiBarLabelForward = '快轉{textIdentity}的歷史紀錄';
+
+	// [DEPRECATED]
+	l10nStrings.uiBarLabelJumpto = '跳到{textIdentity}的歷史紀錄中的某一點';
+
+
+	/*******************************************************************************
+		Dialog: Alert.
+	*******************************************************************************/
+
+	l10nStrings.alertTitle = '警告';
+
+
+	/*******************************************************************************
+		Dialog: Restart.
+	*******************************************************************************/
+
+	l10nStrings.restartTitle = '重新開始';
+
+	l10nStrings.restartMesgPrompt = '你確定要重新開始嗎？未儲存的進度將會丟失。';
+
+
+	/*******************************************************************************
+		Dialog: Saves.
+	*******************************************************************************/
+
+	l10nStrings.continueTitle = '繼續';
+
+	l10nStrings.savesTitle = '存檔';
+
+	l10nStrings.savesHeaderBrowser = '瀏覽器中';
+
+	l10nStrings.savesHeaderDisk = '磁碟中';
+
+	l10nStrings.savesLabelBrowserClear = '清除所有瀏覽器中的存檔';
+
+	l10nStrings.savesLabelBrowserExport = '將瀏覽器中的存檔匯出成檔案';
+
+	l10nStrings.savesLabelBrowserImport = '匯入檔案至瀏覽器中的存檔';
+
+	l10nStrings.savesLabelDiskLoad = '從硬碟讀取存檔';
+
+	l10nStrings.savesLabelDiskSave = '將存檔儲存至硬碟';
+
+	l10nStrings.savesTextBrowserAuto = '自動存檔';
+
+	l10nStrings.savesTextBrowserSlot = '插槽';
+
+	l10nStrings.savesTextNoDate = '未知';
+
+
+	/*******************************************************************************
+		Dialog: Settings.
+	*******************************************************************************/
+
+	l10nStrings.settingsTitle = '設置';
+
+	l10nStrings.settingsTextReset = '重置為預設';
+
+
+	/*******************************************************************************
+		Debugging: Error Views.
+	*******************************************************************************/
+
+	l10nStrings.errorViewTitle = '錯誤頁面';
+
+	l10nStrings.errorViewLabelToggle = '打開/關閉錯誤頁面';
+
+
+	/*******************************************************************************
+		Debugging: Debug bar.
+	*******************************************************************************/
+
+	l10nStrings.debugBarLabelToggle = '打開/關閉偵錯列';
+
+	l10nStrings.debugBarLabelViewsToggle = '打開/關閉偵錯預覽模式';
+
+	l10nStrings.debugBarLabelWatchAdd = '增加監看變數';
+
+	l10nStrings.debugBarLabelWatchAll = '監看全部變數';
+
+	l10nStrings.debugBarLabelWatchClear = '清除所有監看變數';
+
+	l10nStrings.debugBarLabelWatchDelete = '刪除監看變數';
+
+	l10nStrings.debugBarLabelWatchPlaceholder = '變數名稱';
+
+	l10nStrings.debugBarLabelPassagePlaceholder = '段落名稱';
+
+	l10nStrings.debugBarLabelPassagePlay = '播放此段落';
+
+	l10nStrings.debugBarLabelWatchToggle = '打開/關閉監看面板';
+
+	l10nStrings.debugBarMesgNoWatches = '沒有監看變數';
+
+	l10nStrings.debugBarTextAdd = '增加';
+
+	l10nStrings.debugBarTextPassage = '段落';
+
+	l10nStrings.debugBarTextViews = '預覽';
+
+	l10nStrings.debugBarTextWatch = '監看';
+
+
+	/*******************************************************************************
+		Macros.
+	*******************************************************************************/
+
+	// (verb) rewind, revert
+	l10nStrings.macroBackText = '返回';
+
+	// (verb) go/send back
+	l10nStrings.macroReturnText = '返回';
+
+
+	/*******************************************************************************
+		[DEPRECATED] Dialog: Autoload.
+	*******************************************************************************/
+
+	l10nStrings.autoloadTitle = '自動保存';
+
+	l10nStrings.autoloadMesgPrompt = '有一個自動存檔，讀取它還是前往最初的段落？';
+
+	l10nStrings.autoloadTextCancel = '前往最初的段落';
+
+	l10nStrings.autoloadTextOk = '讀取自動存檔';
+
+
+	/*******************************************************************************
+		[DEPRECATED] Dialog: Jump To.
+	*******************************************************************************/
+
+	l10nStrings.jumptoTitle = '跳到';
+
+	l10nStrings.jumptoMesgUnavailable = '目前沒有跳躍點\u2026';
+
+
+	/*******************************************************************************
+		[DEPRECATED] Dialog: Share.
+	*******************************************************************************/
+
+	l10nStrings.shareTitle = '分享';
+})();
+
+/* settings */
+
+Setting.addHeader("變更設定");
+
+/* font type */
+
+var settingFontNames = ["Noto Sans TC", "Noto Serif TC", "DotGothic 16"];
+var settingFontHandler = function () {
+  var $html = $("html");
+  
+  $html.removeClass("Noto-Sans-TC-font Noto-Serif-TC-font DotGothic-font");
+  
+  switch (settings.font) {
+    case "Noto Sans TC":
+      $html.addClass("Noto-Sans-TC-font");
+       break;
+    case "Noto Serif TC":
+      $html.addClass("Noto-Serif-TC-font");
+      break;
+    case "DotGothic 16":
+      $html.addClass("DotGothic-font");
+      break;
+  }
+};
+
+Setting.addList("font", {
+  label    : "設定文字字體",
+  list     :settingFontNames,
+  onInit   :settingFontHandler,
+  onChange :settingFontHandler
+});
+
+/* font size */
+
+var settingFontSizeNames = ["小", "中", "大"];
+var settingFontSizeHandler = function () {
+  var $html = $("html");
+  
+  $html.removeClass("fontsize-medium fontsize-large");
+  
+  switch (settings.fontsize) {
+    case "中":
+      $html.addClass("fontsize-medium");
+      break;
+    case "大":
+      $html.addClass("fontsize-large");
+      break;
+  }
+};
+
+Setting.addList("fontsize", {
+  label    : "設定文字大小",
+  list     :settingFontSizeNames,
+  onInit   :settingFontSizeHandler,
+  onChange :settingFontSizeHandler
+});
+
+/* line height
+var settingLineHeight = ["1.75", "2", "2.25"];
+var settingLineHeightHandler = function () {
+	var $html = $("html");
+
+	$html.removeClass("lineheight-2 lineheight-2-25");
+
+	switch (settings.lineheight) {
+		case "2":
+			$html.addClass("lineheight-2");
+			break;
+		case "2.25":
+			$html.addClass("lineheight-2-25");
+			break;
+	}
+};
+
+Setting.addList("lineheight", {
+  label 	: "設定文字行高",
+  list		:settingLineHeight,
+  onInit	:settingLineHeightHandler,
+  onChange	:settingLineHeightHandler 
+});
+*/
+
+/* colour schemes
+var settingThemeNames = ["Dark", "Light"];
+var settingThemeHandler = function () {
+	var $html = $("html");
+
+	$html.removeClass("light-theme");
+
+	switch (settings.theme) {
+      case "Light":
+		$html.addClass("light-theme");
+		break;
+	}
+};
+Setting.addList("theme", {
+	label    : "設定網頁主題",
+	list     : settingThemeNames,
+	onInit   : settingThemeHandler,
+	onChange : settingThemeHandler
+});
+*/
+
+/* fullscreen
+var settingFullscreenHandler = function () {
+	if (settings.fullscreen) {
+		Fullscreen.request();
+	}
+	else {
+		Fullscreen.exit();
+	}
+};
+Setting.addToggle("fullscreen", {
+  label    : "切換全螢幕",
+  default  : false,
+  onInit   : settingFullscreenHandler,
+  onChange : settingFullscreenHandler
+});
+*/
+
+/* autoname saves 
+Save.onSave.add( function (save, details) {
+    if (settings.autoname) {
+        save.title = State.variables.name + " - " + State.variables.chapter;
+    } else if (details.type == "autosave") {
+        save.title = "Autosave";
+    } else {
+        save.title = prompt("Enter Save Name:", save.title);
+}});
+Setting.addToggle("autoname", {
+    label       : "Toggle autoname saves.",
+    default     : true,
+});
+*/
+
+/* notifications */
+
+Setting.addToggle("notifs", {
+  	label : "開啟／關閉通知",
+  	default : true,
+});
+
+/* indicators 
+var settingIndicatorHandler = function () {
+	if (settings.indicator) {
+		$("html").removeClass("indicator");
+	}
+	else {
+		$("html").addClass("indicator");
+	}
+};
+Setting.addToggle("indicator", {
+	label: "開啟／關閉指示符號",
+	default: true,
+	onInit: settingIndicatorHandler,
+	onChange: settingIndicatorHandler
+});
+*/
+
+/* passage transition 
+
+var settingTransitionHandler = function () {
+	if (settings.transition) {
+		$("html").removeClass("transition");
+	}
+	else {
+		$("html").addClass("transition");
+	}
+};
+Setting.addToggle("transition", {
+	label    : "Toggle passage fade transition.",
+	default  : true,
+	onInit   : settingTransitionHandler,
+	onChange : settingTransitionHandler
+});
+*/
+
+/* Style script */
+// 動態效果：delay
+$(document).on(':passagerender', function (ev) {
+	/* Find all elements containing the delayed class. */
+	var elems = $(ev.content).find('.delayed');
+	/* Appearance delay (in milliseconds) between each delayed text block. */
+	var delay = 1000; // 1 second fade-in
+	if (elems.length > 0) {
+		elems.each(function (i) {
+			$(this)
+				.delay(delay * (i + 1))
+				.fadeTo(delay, 1);
+		});
+	}
+});
+
+/* Tag script */
+/* noreturn */
+$(document).on(":passagestart", function() {
+	if (!tags().includes("noreturn")) {
+		// If it doesn't, then set $return to the current passage name.
+		State.variables.return = passage();
+	}
+});
+
+/* autosave */
+Config.saves.maxAutoSaves = 3;
+Config.saves.isAllowed = function (saveType) {
+	if (saveType === Save.Type.Auto) {
+		return tags().includes("autosave");
+	}
+
+	return true;
+};
+
+
+/* HiEv macros */
+/* Displaying Images in Twine */
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where the HTML file is
+	// located if you want to run this from inside Twine.
+  	setup.Path = "C:/Users/user/Desktop/";  // Running inside Twine application(桌面media資料夾)
+} else { 
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "media/img/";
+setup.SoundPath = setup.Path + "media/sounds/";
+
+/* ChapelR macros */
+/* contine */
+// continue.min.js, for SugarCube 2, by Chapel
+// v1.0.1, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;!function(){"use strict";var n=["a",":button",'*[role="button"]',".continue-macro-ignore","#ui-bar","#ui-dialog"],t=0;function o(){$(document).on("click.continue-macro keyup.continue-macro",n.join(", "),(function(n){n.stopPropagation()}))}function e(){if(State.length>0)return!1;var t=[].slice.call(arguments).flat(1/0);return n=n.concat(t),!0}function c(n,o){var e=function(){var n="."+Date.now().toString(36)+"-"+t;return t++,n}();if(o&&"function"==typeof o){var c="click.continue-macro"+e;n&&(c=c+" keyup.continue-macro"+e),$(document).one(c,(function(){o.call(),$(document).off(e)}))}}prehistory["%%continue-expiration"]=function(){t=0},$(document).one(":passagerender",(function(){o()})),Macro.add("ignore",{handler:function(){if(!e(this.args))return this.error("the <<ignore>> macro should only be run from StoryInit or equivalent.")}}),Macro.add("cont",{tags:null,handler:function(){var n,t=this.args.includes("append"),o=this.args.includesAny("key","keypress","press","button"),e=this.payload[0].contents;t&&(n=$(document.createElement("span")).addClass("macro-"+this.name).appendTo(this.output)),c(o,this.createShadowWrapper((function(){t&&n&&n instanceof $?n.wiki(e):$.wiki(e)})))}}),setup.cont=c,setup.cont.ignore=e,setup.cont.reset=function(){var t=[].slice.call(arguments).flat(1/0);n=n.concat(t),$(document).off(".continue-macro"),o()},window.cont=window.cont||setup.cont}();
+// end continue.min.js
+
+/* fade-in fade-out */
+// fading-macro-set.min.js, for SugarCube 2, by Chapel
+// v1.1.0, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;Macro.add("fadein",{tags:null,handler:function(){var t,a,s=$(document.createElement("span")),e=this.payload[0].contents;if(0===this.args.length)return this.error("no arguments given");t=Util.fromCssTime(this.args[0]),a=this.args.length>1?Util.fromCssTime(this.args[1]):0,s.wiki(e).addClass("macro-"+this.name).appendTo(this.output).hide().delay(a).fadeIn(t)}}),Macro.add("fadeout",{tags:null,handler:function(){var t,a,s=$(document.createElement("span")),e=this.payload[0].contents;if(0===this.args.length)return this.error("no arguments given");t=Util.fromCssTime(this.args[0]),a=this.args.length>1?Util.fromCssTime(this.args[1]):0,s.wiki(e).addClass("macro-"+this.name).appendTo(this.output).delay(a).fadeOut(t)}});
+// end fading-macro-set.min.js
+
+/* notify */
+// notify.min.js, for SugarCube 2, by Chapel
+// v1.1.1, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;!function(){var s=/\d+m?s$/;function a(s,a,e){"string"==typeof s&&("number"!=typeof a&&(a=!1),$(document).trigger({type:":notify",message:s,delay:a,class:e||""}))}$(document.body).append("<div id='notify'></div>"),$(document).on(":notify",(function(s){s.message&&"string"==typeof s.message&&(s.message.trim(),s.class?"string"==typeof s.class?s.class="open macro-notify "+s.class:Array.isArray(s.class)?s.class="open macro-notify "+s.class.join(" "):s.class="open macro-notify":s.class="open macro-notify",s.delay?("number"!=typeof s.delay&&(s.delay=Number(s.delay)),Number.isNaN(s.delay)&&(s.delay=2e3)):s.delay=2e3,$("#notify").empty().wiki(s.message).addClass(s.class),setTimeout((function(){$("#notify").removeClass()}),s.delay))})),Macro.add("notify",{tags:null,handler:function(){var e=this.payload[0].contents,t=!1,i=!1;if(this.args.length>0){var n=s.test(this.args[0]);"number"==typeof this.args[0]||n?(t=n?Util.fromCssTime(this.args[0]):this.args[0],i=this.args.length>1&&this.args.slice(1).flat(1/0)):i=this.args.flat(1/0).join(" ")}a(e,t,i)}}),setup.notify=a}();
+// end notify.min.js
+
+/* stat-meter */
+// meters.min.js, for SugarCube 2, by Chapel
+// v1.0.1, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;!function(){"use strict";var t=!0,e=!1,s=!1,i={full:"#2ECC40",empty:"#FF4136",back:"#DDDDDD",height:"12px",width:"180px",animate:400,easing:"swing",text:"#111111",label:"",align:"center"},n=["center","left","right"],r=["swing","linear"];function a(t,e){return t&&"string"==typeof t&&(t=t.toLowerCase().trim())?t:e||""}function o(t){return t<.5?2*t*t:(4-2*t)*t-1}function l(t,e){if(!(this instanceof l))return new l(t,e);var s=clone(i);this.settings=Object.assign(s,t),this.settings.align=a(this.settings.align),this.settings.easing=a(this.settings.easing),n.includes(this.settings.align)||(this.settings.align="center"),r.includes(this.settings.easing)||(this.settings.easing="swing"),e=Number(e),Number.isNaN(e)&&(e=1),e=Math.clamp(e,0,1),this.value=e;var h=$(document.createElement("div")).addClass("chapel-meter").attr({"data-val":e,"data-label":this.settings.label}).css({position:"relative","background-color":this.settings.back,height:this.settings.height,width:this.settings.width,overflow:"hidden"}),g=$(document.createElement("div")).addClass("meter-label").css({top:0,right:0,"font-size":this.settings.height,"font-weight":"bold","line-height":"100%",width:"100%",height:"100%","vertical-align":"middle","text-align":this.settings.align,color:this.settings.text,"z-index":1,position:"relative",bottom:"100%"}).wiki(this.settings.label).appendTo(h),u=$(document.createElement("div")).addClass("meter-top").css({"background-color":this.settings.full,opacity:o(this.value),width:"100%",height:"100%","z-index":0}),c=$(document.createElement("div")).addClass("meter-bottom").css({position:"absolute",top:0,left:0,"background-color":this.settings.empty,opacity:1,width:100*this.value+"%",height:"100%","z-index":0}).append(u).appendTo(h);this.$element=h,this.$bars={top:u,bottom:c},this.$label=g,g.css("font-size",parseInt(h.css("height"),10)<parseInt($(".passage").css("font-size"),10)?h.css("height"):$(".passage").css("font-size")),g.css("line-height",h.css("height"))}Object.assign(l,{_list:new Map,is:function(t){return t instanceof l},has:function(t){return l._list.has(t)&&l.is(l._list.get(t))},get:function(t){return l.has(t)?l._list.get(t):null},del:function(t){l.has(t)&&l._list.delete(t)},add:function(t,s,i){if(!l.has(t)||e){Object.assign(s,{id:t});var n=new l(s,i);return l._list.set(t,n),n}console.error('Meter "'+t+'" already exists.')},_emit:function(t,e){l.is(t)&&t.$element.trigger({type:":"+e,meter:t})}}),Object.assign(l.prototype,{constructor:l,_label:function(t){var e=this;function s(){e.$label.empty().wiki(e.settings.label),e.$label.css("font-size",parseInt(e.$element.css("height"),10)<parseInt(e.$element.parent().css("font-size"),10)?e.$element.css("height"):e.$element.parent().css("font-size")),e.$label.css("line-height",e.$element.css("height"))}return t?setTimeout(s,Engine.minDomActionDelay):s(),this},_width:function(){var t=this;return this.$bars.bottom.animate({width:100*this.value+"%"},this.settings.animate,this.settings.easing,(function(){l._emit(t,"meter-animation-complete")})),this},_color:function(){return this.$bars.top.animate({opacity:o(this.value)},this.settings.animate,this.settings.easing),this},animate:function(){return l._emit(this,"meter-animation-start"),this._color()._width()._label()},val:function(t){return void 0!==t&&(t=Number(t),Number.isNaN(t)&&(t=1),t=Math.clamp(t,0,1),this.value=t,this.animate()),this.value},options:function(t){return t&&"object"==typeof t&&Object.assign(this.settings,t),this.settings},unwrap:function(){return this.$element[0]},place:function(t,e){var s=$(document.createElement("span"));return t instanceof jQuery||(t=$(t)),t[0]||console.warn("meter#place() -> no valid target"),e&&"object"==typeof e&&(e.classes&&(Array.isArray(e.classes)||"string"==typeof e.classes)&&s.addClass(e.classes),e.attr&&"object"==typeof e.attr&&s.attr(e.attr)),t.append(s.append(this.$element)),this._label(!0),this},on:function(t,e){return"function"!=typeof e?this:t&&"string"==typeof t&&t.trim()?(t=t.split(" ").map((function(t){return(t=t.split(".")[0])+".userland"})).join(" "),this.$element.on(t,e),this):this},one:function(t,e){return"function"!=typeof e?this:t&&"string"==typeof t&&t.trim()?(t=t.split(" ").map((function(t){return(t=t.split(".")[0])+".userland"})).join(" "),this.$element.one(t,e),this):this},off:function(t){return t=t&&"string"==typeof t&&t.trim()?t.split(" ").map((function(t){return(t=t.split(".")[0])+".userland"})).join(" "):".userland",this.$element.off(t),this},click:function(t,e){return this.$element.ariaClick(t,e),this},clone:function(){return new l(this.settings,this.value)},toJSON:function(){return JSON.reviveWrapper("new setup.Meter("+JSON.stringify(this.settings)+", "+this.value+")")}}),setup.Meter=l,t&&(window.Meter=window.Meter||l),Macro.add("newmeter",{tags:["colors","sizing","animation","label"],handler:function(){if(State.length>0&&!s)return this.error("The `<<newmeter>>` macro must be called in your `StoryInit` special passage. Seriously. No excuses. --Love, Chapel");if(this.args.length<1)return this.error("The `<<newmeter>>` macro requires at least one argument: a meter name.");var t=this.args[0],i=null,n=null,r=null,a=null;if("string"!=typeof t)return this.error("Invalid meter name.");if(t=t.trim(),l.has(t)&&!e)return this.error('Cannot clobber the existing meter "'+t+'".');this.payload.length&&(i=this.payload.find((function(t){return"colors"===t.name})),n=this.payload.find((function(t){return"sizing"===t.name})),r=this.payload.find((function(t){return"animation"===t.name})),a=this.payload.find((function(t){return"label"===t.name})));var o={};if(i){if(!i.args.length)return this.error("No arguments passed to the `<<colors>>` tag.");switch(i.args.length){case 1:o.empty=i.args[0],o.full="transparent";break;case 2:o.full=i.args[0],o.empty=i.args[1];break;default:o.full=i.args[0],o.empty=i.args[1],o.back=i.args[2]}}if(n){if(!n.args.length)return this.error("No arguments passed to the `<<sizing>>` tag.");o.width=n.args[0],n.args[1]&&(o.height=n.args[1])}if(r){if(!r.args.length)return this.error("No arguments passed to the `<<animation>>` tag.");if("boolean"!=typeof r.args[0]||r.args[0]){if("string"!=typeof r.args[0])return this.error("The argument to the `<<animation>>` tag should be `true`, `false`, or a valid CSS time value.");o.animate=Util.fromCssTime(r.args[0])}else o.animate=0;r.args[1]&&["swing","linear"].includes(r.args[1])&&(o.easing=r.args[1])}if(a){var h=a.args[0];if(!h||"string"!=typeof h)return this.error("The labelText argument for the `<<label>>` tag is required.");o.label=h.trim(),a.args[1]&&"string"==typeof a.args[1]&&(o.text=a.args[1]),a.args[2]&&"string"==typeof a.args[2]&&(o.align=a.args[2])}l.add(t,o,this.args[1])}}),Macro.add("showmeter",{handler:function(){if(this.args.length<1)return this.error("This macro requires at least one argument: the meter's name.");var t=this.args[0];if("string"!=typeof t)return this.error("Invalid meter name.");t=t.trim();var e=l.get(t);if(!e||!l.is(e))return this.error('The meter "'+t+'" does not exist.');"number"==typeof this.args[1]&&e.val(this.args[1]),e.place(this.output,{classes:"macro-"+this.name,attr:{id:"meter-"+Util.slugify(t)}})}}),Macro.add("updatemeter",{handler:function(){if(this.args.length<2)return this.error("This macro requires two arguments: the meter's name and a value.");var t=this.args[0];if("string"!=typeof t)return this.error("Invalid meter name.");t=t.trim();var e=l.get(t);if(!e||!l.is(e))return this.error('The meter "'+t+'" does not exist.');e.val(this.args[1])}})}();
+// end meters.min.js
+
+// message-macro.min.js, for SugarCube 2, by Chapel
+// v1.0.1, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;setup.messageMacro={},setup.messageMacro.default="Help",Macro.add("message",{tags:null,handler:function(){var e=this.payload[0].contents,a=$(document.createElement("span")),s=$(document.createElement(this.args.includes("btn")?"button":"a")),t=$(document.createElement("span"));s.wiki(this.args.length>0&&"btn"!==this.args[0]?this.args[0]:setup.messageMacro.default).ariaClick(this.createShadowWrapper((function(){a.hasClass("open")?t.css("display","none").empty():t.css("display","block").wiki(e),a.toggleClass("open")}))),a.attr("id","macro-"+this.name+"-"+this.args.join("").replace(/[^A-Za-z0-9]/g,"")).addClass("message-text").append(s).append(t).appendTo(this.output)}});
+// end message-macro.min.js
+
+// preload.min.js, for SugarCube 2, by Chapel
+// v1.1.0, 2024-07-22, 336675ff2cabe5f729a5f30d86aa409cc8432726
+;!function(){"use strict";function r(r,o){var t=0,e=r.length;if(0===e)throw new Error("No URLs to preload!");r.forEach((function(r){!function(r,o){var t=new Image;t.onload=o,t.onerror=o,t.src=r}(r,(function(){++t===e&&o()}))}))}function o(){return State.length<=0}function t(){var t=[].slice.call(arguments).flat(1/0),e=!!o()&&LoadScreen.lock();return r(t,(function(){e&&LoadScreen.unlock(e)})),e}setup.preload=t,setup.preload.force=!1,Macro.add("preload",{handler:function(){if(!o()&&!setup.preload.force)return this.error("Attempting to preload images outside of `StoryInit` or similar can cause performance issues. Set `setup.preload.force` to `true` if you want to do it anyway.");t(this.args.flat(1/0).filter((function(r){return"string"==typeof r})))}})}();
+// end preload.min.js
+
+
+/* twine-user-script #1: "shake-macro-set.min.js" */
+/*! <<shake>> macro set for SugarCube 2.x */
+!function(){"use strict";if("undefined"==typeof version||"undefined"==typeof version.title||"SugarCube"!==version.title||"undefined"==typeof version.major||version.major<2||"undefined"==typeof version.minor||version.minor<5)throw new Error("<<shake>> macro requires SugarCube 2.5.0 or greater, aborting load");Macro.add("shake",{tags:null,handler:function(){var duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake";if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}Config.debug&&this.debugView.modes({block:!0});var $wrapper=jQuery(document.createElement("span"));$wrapper.addClass("macro-"+this.name+" "+shakeClass).wiki(this.payload[0].contents).appendTo(this.output),1/0!==duration&&setTimeout(function(){$wrapper.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}}),Macro.add(["shakescreen","shaketarget"],{handler:function(){var $targets,duration,shakeClass;if("shakescreen"===this.name)$targets=jQuery("#passages"),duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake-block";else{if(0===this.args.length)return this.error("no selector specified");if($targets=jQuery(this.args[0]),0===$targets.length)return this.error('no elements matched the selector "'+this.args[0]+'"');duration=this.args.length>1?this.args[1]:1/0,shakeClass="block"===jQuery($targets[0]).css("display")?"shake-block":"shake"}if("stop"===duration)return void $targets.removeClass(shakeClass);if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}$targets.addClass(shakeClass),1/0!==duration&&setTimeout(function(){$targets.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}})}();
+
+/* twine-user-script #2: "crossfade.js" */
+// Cycy wrote custom macros, for SugarCube 2
+// https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master
+; (function () {
+	"use-strict";
+	var crossfade = {};
+
+	function crossfadeContainer(id) {
+		var image = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		if (!id) throw new Error("No ID specified!");
+		var $el = $("<div />").addClass("macro-crossfade").attr("data-macro-crossfade-id", id);
+		var imgBack = $("<img />").addClass("macro-crossfade-image").attr("src", image).appendTo($el);
+		var imgFront = $("<img />").addClass("macro-crossfade-image").attr("src", image).appendTo($el);
+		return $el.get(0);
+	}
+	crossfade.container = crossfadeContainer;
+
+	function crossfadeSelector(id) {
+		return '.macro-crossfade[data-macro-crossfade-id="' + id + '"]';
+	}
+	crossfade.selector = crossfadeSelector;
+
+	function fade(element, img) {
+		var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
+		if (!element) throw new Error("No element specified!");
+		var $el = $(element);
+		if (!$el.length) throw new Error(_typeof(element) === "string" ? 'No elements matched selector "' + selector + '"!' : 'Specified element not found!');
+		if (!$el.hasClass("macro-crossfade")) $el.addClass("macro-crossfade");
+		if ($el.children("img").length === 0) $("<img /><img />").addClass("macro-crossfade-image").appendTo($el);
+		var images = $el.children("img");
+		var backBefore = images.eq(0);
+		var frontBefore = images.eq(1);
+		img = img || null;
+		if (Number(frontBefore.css("opacity")) < 1) frontBefore.stop(true, true);
+		backBefore.attr("src", img).stop().fadeOut(0).appendTo(images.parent()).fadeIn(img ? duration : 0, function () {
+			var backAfter = images.eq(1);
+			if (img) {
+				backAfter.attr("src", img);
+			} else {
+				backAfter.fadeOut(duration, function () {
+					backAfter.attr("src", img).fadeIn(0);
+				});
+			}
+		});
+	}
+	crossfade.fade = fade;
+
+	Macro.add("crossfadecontainer", {
+		handler: function handler() {
+			var id = this.args[0];
+			var img = this.args[1];
+
+			try {
+				this.output.append(crossfadeContainer(id, img));
+			} catch (ex) {
+				return this.error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	Macro.add("crossfade", {
+		handler: function handler() {
+			var _this$args$;
+			if (this.args.length === 0) return this.error("No ID specified!");
+			if (this.args.length === 1) return this.error("No image path specified!");
+			var selector = crossfadeSelector(this.args[0]);
+			if (!$(selector).length) return this.error('No "<<crossfadecontainer>>" with ID "' + this.args[0] + '" found!');
+			var img = this.args[1];
+			var duration = Util.fromCssTime((_this$args$ = this.args[2]) !== null && _this$args$ !== void 0 ? _this$args$ : "400ms");
+			fade(selector, img, duration);
+		}
+	});
+
+	setup.crossfade = crossfade;
+})();
+
+/* twine-user-script #3: "live-update.js" */
+// Cycy wrote custom macros, for SugarCube 2
+// https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master
+(function () {
+	"use strict";
+
+	$(document).on(":liveupdate", function () {
+		$(".macro-live").trigger(":liveupdateinternal");
+	});
+
+	Macro.add(['update', 'upd'], {
+		handler: function handler() {
+			$(document).trigger(":liveupdate");
+		}
+	});
+
+	Macro.add(['live', 'l', 'lh'], {
+		skipArgs: true,
+		handler: function handler() {
+			if (this.args.full.length === 0) {
+				return this.error('no expression specified');
+			}
+			try {
+				var statement = this.args.full;
+				var result = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+				if (result !== null) {
+					var lh = this.name === "lh";
+					var $el = $("<span></span>").addClass("macro-live").wiki(lh ? Util.escape(result) : result).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						var out = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+						$el.empty().wiki(lh ? Util.escape(out) : out);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+
+	Macro.add(['liveblock', 'lb'], {
+		tags: null,
+		handler: function handler() {
+			try {
+				var content = this.payload[0].contents.trim();
+				if (content) {
+					var $el = $("<span></span>").addClass("macro-live macro-live-block").wiki(content).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						$el.empty().wiki(content);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+})();
+
+/* twine-user-script #4: "click-to-proceed.js" */
+// Cycy wrote custom macros, Click to Proceed (CTP) v1, for SugarCube 2
+// https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master
+(function () {
+	"use strict";
+	window.CTP = function (config) {
+		this.id = "";
+		this.selector = "";
+		this.stack = [];
+		this.head = "";
+		this.tail = "";
+		this.log = {
+			clear: 0,
+			index: 0,
+			seen: 0,
+			delayed: false
+		};
+		Object.keys(config).forEach(function (pn) {
+			this[pn] = clone(config[pn]);
+		}, this);
+	};
+
+	CTP.prototype.clone = function () {
+		return new CTP(this);
+	};
+
+	CTP.prototype.toJSON = function () {
+		var ownData = {};
+		Object.keys(this).forEach(function (pn) {
+			ownData[pn] = clone(this[pn]);
+		}, this);
+		return JSON.reviveWrapper('new CTP($ReviveData$)', ownData);
+	};
+
+	CTP.getCTP = function (id) {
+		var clone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!id || !id.trim()) throw new Error("No ID specified!");
+		variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+		if (!variables()["#macro-ctp-dump"][id]) throw new Error("No CTP with ID '" + id + "' found!");
+		return clone ? variables()["#macro-ctp-dump"][id].clone() : variables()["#macro-ctp-dump"][id];
+	};
+
+	CTP.contentObject = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		mods = mods.split(/\s+/g);
+		return {
+			clear: mods.includes("clear") && !mods.includes("noClear"),
+			nobr: mods.includes("nobr") && !mods.includes("br"),
+			transition: mods.includesAny("t8n", "transition") && !mods.includesAny("noT8n", "noTransition"),
+			delay: Util.fromCssTime(mods.find(function (el) {
+				return /[0-9\.]+m?s/.test(el);
+			}) || "0s"),
+			re: mods.includes("redo"),
+			content: content
+		};
+	};
+
+	CTP.prototype.add = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		var contentObj = CTP.contentObject(content, mods);
+		contentObj.index = this.stack.length;
+		this.stack.push(contentObj);
+		return this;
+	};
+
+	CTP.item = function (item) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!item) return "";
+		var t8n = noT8n ? "" : item.transition ? "macro-ctp-entry-t8n" : "";
+		var br = item.index === 0 || item.index === "head" || item.clear ? " " : item.nobr ? " " : '<br class="macro-ctp-entry-index-' + item.index + '">';
+		var brAfter = item.index === "head" && !item.nobr ? "<br>" : " ";
+		return br + '<span class="macro-ctp-visible macro-ctp-entry macro-ctp-entry-index-' + item.index + ' ' + t8n + '">' + item.content + '\n</span>' + brAfter;
+	};
+
+	CTP.prototype.entry = function (index) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (index < 0 || index >= this.stack.length) return "";
+		var entry = this.stack[index];
+		return CTP.item(entry, noT8n);
+	};
+
+	CTP.prototype.out = function () {
+		return '<span class="macro-ctp-wrapper">' + '<span class="ctp-head"></span>' + '<span class="ctp-body">' + this.entry(0) + '</span>' + '<span class="ctp-tail"></span>' + '</span>';
+	};
+
+	CTP.prototype.go = function (diff) {
+		if (!Number.isInteger(diff)) throw new Error(`Cannot move by non-integral amounts!`);
+		if (diff > 0) {
+			for (var i = 0; i < diff; i++) {
+				this.advance(true);
+			}
+		} else if (diff < 0) {
+			for (var _i = 0; _i < -diff; _i++) {
+				this.back();
+			}
+		}
+	};
+
+	CTP.prototype.goTo = function (index) {
+		this.go(index - this.log.index);
+	};
+
+	CTP.prototype.advance = function () {
+		var noDelay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var _this = this;
+		if (this.log.index === this.stack.length - 1 || this.log.delayed) return;
+		var index = ++this.log.index;
+		this.log.seen = Math.max(this.log.seen, index);
+		var _el = $(this.selector).children(".ctp-body");
+		if (this.stack[index].clear) {
+			_el.children().removeClass("macro-ctp-visible").hide();
+			this.log.clear = index - 1;
+		}
+		function delay(ctp) {
+			ctp.log.delayed = false;
+			$(ctp.selector).children(".ctp-body").wiki(ctp.entry(ctp.log.index)).siblings(".ctp-head").empty().wiki(CTP.item(ctp.head)).siblings(".ctp-tail").empty().wiki(CTP.item(ctp.tail));
+		}
+		if (noDelay) {
+			delay(_this);
+		} else {
+			this.log.delayed = true;
+			return new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					delay(_this);
+					resolve("advanced");
+				}, _this.stack[index].delay);
+			});
+		}
+	};
+
+	CTP.prototype.back = function () {
+		var _this3 = this;
+		if (this.log.index <= 0 || this.log.delayed) return this;
+		if (this.log.clear >= --this.log.index) {
+			var clearIndex = 0;
+			var _clear = this.stack.filter(function (el) {
+				return el.clear && el.index < _this3.log.index + 1;
+			});
+			if (_clear.length) clearIndex = _clear[_clear.length - 1].index;
+			this.stack.slice(clearIndex, this.log.index + 1).forEach(function (el) {
+				$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).addClass("macro-ctp-visible").show();
+			}, this);
+		}
+		var item = this.stack[this.log.index];
+		if (item.re) $(this.selector).children(".ctp-body").children(".macro-ctp-entry.macro-ctp-entry-index-" + item.index).empty().wiki(item.content);
+		this.stack.slice(this.log.index + 1, this.log.seen + 1).forEach(function (el) {
+			$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).remove();
+		}, this);
+		$(this.selector).children(".ctp-head").empty().wiki(CTP.item(this.head)).siblings(".ctp-tail").empty().wiki(CTP.item(this.tail));
+		return this;
+	};
+
+	Macro.add("ctp", {
+		tags: ["ctpNext", "ctpHead", "ctpTail"],
+		handler: function handler() {
+			if (this.args.length === 0) return this.error("No ID specified!");
+			var _id = this.args[0];
+			var _data = 'data-ctp="' + Util.escape(_id) + '"';
+			var ctp = new CTP({
+				id: _id,
+				selector: '[' + _data + ']'
+			});
+			var _overArgs = this.payload[0].args;
+			_overArgs.reverse().pop();
+			_overArgs = " " + _overArgs.join(" ");
+			this.payload.forEach(function (el, index) {
+				var _args = el.args.join(" ");
+				switch (el.name) {
+					case "ctpHead":
+						{
+							var _head = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_head.index = "head";
+							ctp.head = _head;
+							break;
+						}
+					case "ctpTail":
+						{
+							var _tail = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_tail.index = "tail";
+							ctp.tail = _tail;
+							break;
+						}
+					default:
+						{
+							ctp.add(el.contents.trim(), (el.name === "ctp" ? "" : _args) + _overArgs);
+							break;
+						}
+				}
+			});
+			variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+			variables()["#macro-ctp-dump"][_id] = ctp;
+			let out = $("<div />");
+			out.wiki(ctp.out()).children(".macro-ctp-wrapper").attr("data-ctp", Util.escape(_id)).children(".ctp-head").wiki(CTP.item(ctp.head)).siblings(".ctp-tail").wiki(CTP.item(ctp.tail));
+			$(this.output).append(out.children().unwrap());
+		}
+	});
+
+	Macro.add("ctpAdvance", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.advance();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	Macro.add("ctpBack", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.back();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	$(document).on(':passageinit', function () {
+		delete variables()["#macro-ctp-dump"];
+	});
+})();
+
+/* twine-user-script #4: "click-to-proceed.js" */
+// Cycy wrote custom macros, Click to Proceed (CTP) v1, for SugarCube 2
+// https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master
+
+:: StoryStylesheet [stylesheet]
+@charset "UTF-8";
+/* IMPORT FONTS */
+/* 思源黑體&思源宋體 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400&display=swap");
+/* 日文：Yuji Syuku */
+@import url("https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap");
+/* 點陣字體 DotGothic16 */
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+/* 楷體字體 https://fonts.googleapis.com/earlyaccess/cwtexkai.css */
+@font-face {
+  font-family: 'cwTeXKai';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf) format('truetype');
+}
+/* 圓體字體 https://fonts.googleapis.com/earlyaccess/cwtexyen.css */
+@font-face {
+  font-family: 'cwTeXYen';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot);
+  src: url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2) format('woff2'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff) format('woff'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
+}
+/* 內海字體 https://github.com/max32002/naikaifont */
+@font-face {
+  font-family: 'naikaifont';
+  src: url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.0/webfont/NaikaiFont-Regular-Lite.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.89/webfont/NaikaiFont-Regular.woff2) format("woff2");
+}
+/* 其他字型 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.cdnfonts.com/css/open-dyslexic');
+
+
+/* root 
+comment --
+set up your css variables here!
+*/
+
+:root {
+  --bg1: #111;
+  --text: #ddd;
+
+  /* light mode */
+  --bg2: #ddd;
+  --text_light: #111;
+
+  /* fonts */
+  --fontbody: 'Noto Sans TC', sans-serif;
+  --font_01: 'Noto Sans TC', serif;
+  --font_02: 'Noto Serif TC', sans-serif;
+  --font_03: 'DotGothic16', sans-serif;
+}
+
+
+/* custom style - tag */
+/* "notran"標籤：取消進入新passage的過渡動畫 */
+.passage.notran {
+	transition: none;
+  	opacity: 1;
+}
+
+/* "center"標籤：頁面文字置中 */
+tw-passage[tags="center"] {
+  text-align: center;
+}
+.center.passage {
+  text-align: center;
+}
+
+/* "bg+數字"標籤：自訂背景 */
+body.loading-page {
+  background-image: url("media/img/bgloading.png");
+  display: flex;
+  min-height: 100vh;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+}
+
+
+/* basics */
+
+html {
+  height: 100%;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+#header {
+  padding: 1vh 1vw;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 97%;
+  height: 3vh;
+  padding: 0em 1em;
+}
+
+body {
+  color: var(--text);
+  font-family: var(--fontbody);
+  background-color: var(--bg1);
+}
+
+
+/* splash */
+
+.splash #nav {
+  display: none;
+}
+
+.splash #title-container {
+  display: none;
+}
+
+.logo {
+  display: flex;
+  margin: auto;
+  margin-top: 25vh;
+  justify-content: center;
+}
+
+.logo img {
+  width: 30%;
+  filter: grayscale(1);
+}
+
+.light-theme .logo img {
+  filter: grayscale(1) brightness(0.5);
+}
+
+.game-start-timed {
+  display: block;
+  margin: auto;
+  letter-spacing: 0.1em;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+
+.game-start-timed:hover {
+  opacity: 0.5;
+}
+
+
+/* start menu */
+
+#start-title {
+  display: block;
+  margin-top: 15vh;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 0.2em;
+}
+
+#start-subtitle {
+  display: block;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+#start-menu {
+  display: grid;
+  grid-gap: 1em;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+#start-menu button {
+  width: 12em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: solid 1px var(--text);
+}
+
+#start-menu button:hover {
+  background-color: var(--bg2);
+  color: var(--text_light);
+}
+
+.start-menu #nav {
+  display: none;
+}
+
+.start-menu #console {
+  height: 100%;
+}
+
+
+/* console */
+
+#console {
+  display: block;
+  width: 45vw;
+  height: 95vh;
+  margin: auto;
+  padding: 0em 2em;
+}
+
+#title-container {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5em 0em;
+}
+
+.title-item {
+}
+
+.chapter-item {
+  float: right;
+}
+
+.start-menu #title-container {
+  display: none;
+}
+
+
+/* passages */
+
+#passages {
+  max-height: 82vh;
+  width: 100%;
+  height: 100%;
+  max-width: 1000%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 1em auto;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+
+.passage {
+  line-height: 1.75;
+  text-align: justify;
+}
+
+#passages::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* navigation */
+
+.fa-icons:before {
+  display: none;
+}
+
+.fa-icons {
+  font-size: 1.2em;
+}
+
+#nav {
+  display: inline-flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-around;
+  margin-top: 1vh;
+  border-bottom: 1.5px solid #666;
+  border-top: 1.5px solid #666;
+  padding: 0.5em 0em;
+}
+
+#nav a {
+  color: var(--text);
+  opacity: 0.5;
+}
+
+#nav a:hover {
+  opacity: 1;
+  color: var(--text);
+}
+
+
+/* links, button, select, textbox, listbox, cycle */
+
+a {
+  color: inherit;
+  opacity: 0.5;
+}
+
+a:hover {
+  color: inherit;
+  opacity: 1;
+  text-decoration: none;
+}
+
+button {
+  color: var(--text);
+  background-color: transparent;
+  border: solid 1px var(--text);
+}
+
+button:hover {
+  background-color: #333;
+  border: solid 1px var(--text);
+}
+
+button:disabled {
+  background-color: transparent;
+  border: solid 1px var(--text);
+}
+
+select {
+  width: 10em;
+  border: solid 1px var(--text);
+}
+
+input[type=text] {
+  border: solid 1px var(--text);
+}
+
+input[type=text]:hover {
+  background-color: #333;
+}
+
+.macro-cycle {
+  color: var(--text);
+  opacity: 0.5;
+}
+
+.macro-cycle:hover {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 1;
+}
+
+.macro-cycle:after {
+  content: "↻";
+  padding-left: 0.3em;
+}
+
+
+/* headings, lists */
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+li {
+  list-style-type: circle;
+  margin-bottom: -1.5em;
+}
+
+li::marker {
+  font-size: 18px;
+}
+
+
+/* choices styling */
+/* example code --
+
+<<nobr>><div class="choices">
+	<div class="choice-item">[[Choice|Passage]]</div>
+</div><</nobr>> 
+
+or
+
+<<nobr>><div class="choices">
+	<div class="choice-item"><<link "Choice" "Passage">><</link>></div>
+</div><</nobr>>
+
+*/
+
+.choices {
+  display: block;
+}
+
+.choice-item, .special-choice-item, .flirt-choice-item {
+  margin-bottom: 1.2em;
+}
+
+.choice-item a, .special-choice-item a, .flirt-choice-item a {
+  display: block;
+  margin: auto;
+  text-align: center;
+  transition: 0.2s;
+  letter-spacing: 0.1em;
+  padding: 0.1em 0.5em;
+  border: solid 1.5px var(--text);
+  color: var(--text);
+  text-decoration: none;
+  opacity: 1;
+}
+
+.choice-item:hover a, .special-choice-item:hover a, .flirt-choice-item:hover a {
+  color: var(--text_light);
+  background-color: var(--text);
+}
+
+.flirt-choice-item a::after {
+  content: '\f004';
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+
+.special-choice-item a::after {
+  content: '\f005';
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+
+
+/* profile */
+
+#stat-title {
+  display: flex;
+  text-transform: uppercase;
+  justify-content: space-between;
+}
+
+
+/* notify */
+
+#notify {
+  position : fixed;
+  display: block;
+  color: var(--text_light);
+  background-color: var(--bg2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 15vw;
+  right: -25em; 
+  top : 5em;
+  padding: 0.7em 3em 0.7em 4em;
+  text-align: center;
+  -webkit-transition : right 0.5s;
+  -moz-transition : right 0.5s;
+  -o-transition : right 0.5s;
+  transition : right 0.5s;
+}
+
+#notify.open { 
+  right: 0; 
+}
+
+
+/* click-to-proceed */
+.macro-ctp-entry {
+	display: inline-block;
+}
+
+.macro-ctp-entry-t8n {
+	animation: macro-ctp-fade-in 0.4s ease;
+}
+
+@keyframes macro-ctp-fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+/* ui dialog boxes */
+/* base */
+
+#ui-dialog-body {
+  background-color: var(--bg1);
+  border: solid 1.5px var(--text);
+  padding: 2em 1em;
+}
+
+#ui-dialog-titlebar {
+  display: none;
+}
+
+#ui-dialog-body ul.buttons {
+  text-align: center;
+}
+
+#ui-dialog-body.settings h2[id|=header-heading] {
+  font-weight: normal;
+  font-size: 1.2em;
+}
+
+/* ui settings */
+
+#ui-dialog-body.settings {
+  width: 45vw;
+}
+
+#ui-dialog-body.settings div[id|=header-body] {
+  display: block;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+
+#ui-dialog-body.settings button {
+  width: 10em;
+}
+
+#ui-dialog-body.settings button[id|=setting-control] {
+  color: var(--text);
+  border: solid 1.5px var(--text);
+  background-color: transparent;
+}
+
+#ui-dialog-body.settings button[id|=setting-control]:hover {
+  background-color: #333;
+}
+
+#ui-dialog-body.settings button[id|=setting-control].enabled {
+  color: var(--text_light);
+  background-color: var(--text);
+  border: solid 1.5px var(--text);
+}
+
+#ui-dialog-body.settings button[id|=setting-control].enabled:hover {
+  color: var(--text_light);
+  background-color: var(--text);
+  border: solid 1.5px var(--text);
+}
+
+/* ui credits */
+
+#ui-dialog-body.credits {
+  width: 50vw;
+}
+
+/* ui saves */
+
+#ui-dialog-body.saves {
+  width: 100%;
+  padding: 2em 1em;
+}
+
+#ui-dialog-body.saves button {
+  width: 5em;
+}
+
+#ui-dialog-body.saves ul.buttons button {
+  width: 10em;
+  text-align: center;
+}
+
+/* ui restart */
+
+#ui-dialog-body.restart {
+  margin-top: 30vh;
+}
+
+#ui-dialog-body.restart ul.buttons button {
+  width: 6em;
+}
+
+/* ui profile */
+
+#ui-dialog-body.profile {
+  width: 50vw;
+}
+
+
+/* settings */
+/* font types */
+
+html.Noto-Sans-TC-font:root {
+  --fontbody: var(--font_01);
+}
+
+html.Noto-Serif-TC-font:root {
+  --fontbody: var(--font_02);
+}
+
+html.DotGothic-font:root {
+  --fontbody: var(--font_03);
+}
+
+/* font size */
+
+html.fontsize-medium .passage {
+  font-size: 18px;
+}
+
+html.fontsize-large .passage {
+  font-size: 20px;
+}
+
+/* line height */
+
+html.lineheight-2 .passage {
+  line-height: 2;
+}
+
+html.lineheight-2-25 .passage {
+  line-height: 2.25;
+}
+
+/* transition */
+
+html.transition .passage {
+  webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+/* indicators */
+
+html.indicator .special-choice-item a::after, html.indicator .flirt-choice-item a::after {
+  content: none;
+}
+
+/* light theme */
+
+.light-theme body {
+  background-color: var(--bg2);
+  color: var(--text_light);
+}
+
+.light-theme #nav a {
+  color: var(--text_light)
+}
+
+.light-theme #nav a:hover {
+  color: var(--text_light);
+}
+
+.light-theme button {
+  color: var(--text_light);
+  background-color: transparent;
+  border: solid 1px var(--text_light);
+}
+
+.light-theme button:hover {
+  background-color: #bbb;
+  border: solid 1px var(--text_light);
+}
+
+.light-theme button:disabled {
+  background-color: transparent;
+  border: solid 1px var(--text_light);
+}
+
+.light-theme select {
+  border: solid 1px var(--text_light);
+  color: var(--text_light);
+}
+
+.light-theme select:hover {
+  border: solid 1px var(--text_light);
+  background-color: #bbb;
+}
+
+.light-theme input[type=text] {
+  border: solid 1px var(--text_light);
+  color: var(--text_light);
+}
+
+.light-theme input[type=text]:hover {
+  background-color: #bbb;
+}
+
+.light-theme .macro-cycle {
+  color: var(--text_light);
+  opacity: 0.5;
+}
+
+.light-theme .macro-cycle:hover {
+  color: var(--text_light);
+  text-decoration: none;
+  opacity: 1;
+}
+
+.light-theme #start-menu button {
+  color: var(--text_light);
+  border: solid 1px var(--text_light);
+}
+
+.light-theme #start-menu button:hover {
+  background-color: var(--text_light);
+  color: var(--bg2);
+}
+
+.light-theme .choice-item a, .light-theme .special-choice-item a, .light-theme .flirt-choice-item a {
+  color: var(--text_light);
+  border: solid 1.5px var(--text_light);
+}
+
+.light-theme .choice-item:hover a, .light-theme .special-choice-item:hover a, .light-theme .flirt-choice-item:hover a {
+  color: var(--bg2);
+  background-color: var(--text_light);
+}
+
+.light-theme #ui-dialog-body {
+  background-color: var(--bg2);
+  border: solid 1.5px var(--text_light);
+}
+
+.light-theme #ui-overlay.open {
+  background-color: #bbb;
+}
+
+.light-theme #ui-dialog-body.settings button[id|=setting-control] {
+  color: var(--text_light);
+  border: solid 1.5px var(--text_light);
+}
+
+.light-theme #ui-dialog-body.settings button[id|=setting-control].enabled {
+  color: var(--text);
+  border: solid 1.5px var(--text_light);
+  background-color: var(--bg1);
+}
+
+.light-theme #ui-dialog-body.settings [id|=setting-control] {
+  color: var(--text_light);
+  border: solid 1.5px;
+}
+
+.light-theme #ui-dialog-body.settings [id|=setting-control]:hover {
+  background-color: #bbb;
+}
+
+/* light theme notify */
+
+.light-theme #notify {
+  background-color: var(--bg1);
+  color: var(--text);
+}
+
+
+/* tablet ui */
+
+@media only screen and (max-width: 1024px) {
+
+  #start-menu {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+  }
+
+  #console {
+    width: 85vw;
+    height: 85vh;
+    padding: 1vh 5vw 3vh 5vw;
+  }
+
+  .start-menu #passages {
+    height: 100%;
+  }
+
+  #ui-dialog-body.credits, #ui-dialog-body.profile, #ui-dialog-body.settings {
+    width: 70vw;
+  }
+}
+
+
+/* mobile ui */
+
+@media only screen and (max-width: 750px) {
+
+  body {
+    width: 100%;
+    min-width: auto;
+  }
+
+  #passages {
+    padding: 0.5em 0em;
+    min-height: 83vh;
+    margin: 0.5em 0em;
+    width: 100%;
+  }
+
+  #console {
+    padding: 2vh 5vw 3vh 5vw;
+  }
+
+  .start-menu #header {
+    display: block;
+  }
+
+  #header {
+    display: none;
+  }
+
+  /*
+  #footer {
+    display: none;
+  }
+  */
+
+  #title-container {
+    font-size: 1em;
+    padding: 0.3em;
+    margin-top: 0.5em;
+  }
+
+  /* ui dialog body */
+
+  #ui-dialog-body.credits, #ui-dialog-body.profile, #ui-dialog-body.settings {
+    width: 92vw;
+    height: -webkit-fill-available;
+  }
+
+  #ui-dialog-body.saves>:not(:first-child) {
+    display: inline-grid;
+    width: 100%;
+    padding-top: 0.5em;
+    margin-top: 0.5em;
+  }
+
+  #ui-dialog-body.saves ul.buttons button {
+    width: 100%;
+  }
+
+  #ui-dialog-body.saves ul.buttons>li+li>button {
+    margin-left: 0;
+  }
+
+  #ui-dialog-body.settings ul.buttons button {
+    width: 8em;
+  }
+
+  /* notify */
+
+  #notify {
+    width: 100%;
+    top: -10em;
+    right: 0em;
+    left: 0;
+    height: 1em;
+    padding: 0.25em;
+    transition: top 0.5s;
+    text-align: center;
+  }
+
+  #notify.open {
+    top: 0;
+  }
+
+}
+
+
+/* costum style - 文字動態效果 */
+/* 文字置中 */
+.center {
+	text-align: center;
+}
+
+/* 逐行出現 */
+.delayed {
+    opacity: 0;
+}
+
+/* 文字陰影 */
+.shadow {
+	text-shadow: 0.08em 0.08em 0.08em #FFF;
+}
+
+/* 文字浮凸 */
+.emboss {
+	text-shadow: 0.08em 0.08em 0em #FFF;
+	color: black;
+}
+
+/* 文字模糊 */
+.blur {
+	color: transparent;
+	text-shadow: 0em 0em 0.08em #FFF;
+}
+
+/* 文字焦糊 */
+.blurrier {
+	color: transparent;
+	text-shadow: 0em 0em 0.2em #FFF;
+}
+.blurrier::selection {
+	background-color: transparent;
+	color: transparent;
+}
+.blurrier::-moz-selection {
+	background-color: transparent;
+	color: transparent;
+}
+
+/* 光暈效果 */
+.smear {
+	color: transparent;
+	text-shadow:
+		0em    0em 0.02em rgba(255,255,255,0.75),
+		-0.2em 0em 0.5em  rgba(255,255,255,0.5),
+		0.2em  0em 0.5em  rgba(255,255,255,0.5);
+}
+
+/* 文字鏡射 */
+.mirror {
+	display: inline-block;
+	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+}
+
+/* 文字上下顛倒 */
+.upside-down {
+	display: inline-block;
+	transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+}
+
+/* 閃爍效果 */
+@-webkit-keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+@keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+.fade-in-out {
+	text-decoration: none;
+	animation: fade-in-out 2s ease-in-out infinite alternate;
+	-webkit-animation: fade-in-out 2s ease-in-out infinite alternate;
+}
+
+/* 上下抖動 */
+@-webkit-keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+@keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+.rumble {
+	-webkit-animation: rumble linear 0.1s 0s infinite;
+	animation: rumble linear 0.1s 0s infinite;
+	display:inline-block;
+}
+
+/* 左右抖動 */
+@-webkit-keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+@keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+.shudder {
+	-webkit-animation: shudder linear 0.1s 0s infinite;
+	animation: shudder linear 0.1s 0s infinite;
+	display: inline-block;
+}
+
+/* 彈出效果 */
+@-webkit-keyframes pulse {
+	0%  { -webkit-transform: scale(0, 0); transform: scale(0, 0) }
+	20% { -webkit-transform: scale(1.2, 1.2); transform: scale(1.2, 1.2) }
+	40% { -webkit-transform: scale(0.9, 0.9); transform: scale(0.9, 0.9) }
+	60% { -webkit-transform: scale(1.05, 1.05); transform: scale(1.05, 1.05) }
+	80% { -webkit-transform: scale(0.925, 0.925); transform:scale(0.925, 0.925) }
+	to  { -webkit-transform: scale(1, 1); transform: scale(1, 1) }
+}
+@keyframes pulse {
+	0%  { -webkit-transform: scale(0, 0); transform: scale(0, 0) }
+	20% { -webkit-transform: scale(1.2, 1.2); transform: scale(1.2, 1.2) }
+	40% { -webkit-transform: scale(0.9, 0.9); transform: scale(0.9, 0.9) }
+	60% { -webkit-transform: scale(1.05, 1.05); transform: scale(1.05, 1.05) }
+	80% { -webkit-transform: scale(0.925, 0.925); transform: scale(0.925, 0.925) }
+	to  { -webkit-transform: scale(1, 1); transform: scale(1, 1) }
+}
+.pulse {
+	-webkit-animation: pulse 0.8s;
+	animation: pulse 0.8s;
+	display: inline-block;
+}
+
+/* 喝醉效果 */
+.drunk {
+	animation: drunkCam 10s infinite alternate;
+	color: white;
+}
+@keyframes drunkCam {
+	0%  { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	20% { filter: blur(1px); text-shadow: 8px 0 0 grey; }
+	24% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	26% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	28% { filter: blur(1px); text-shadow: 10px 0 0 grey; }
+	30% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	60% { filter: blur(1px); text-shadow: 5px 0 0 grey; }
+	62% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	65% { filter: blur(2px); text-shadow: 8px 0 0 grey; }
+	67% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	80% { filter: blur(0px); text-shadow: 8px 0 0 grey; }
+	85% { filter: blur(2px); text-shadow: 10px 0 0 grey; }
+	88% { filter: blur(1px); text-shadow: 5px 0 0 grey; }
+	90% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+}
+
+/* 發抖效果 */
+/* The "clip" in ".glitch" is depreciated, so technically you should use the "clip-path" that's in ".glitchy" instead, however IE doesn't support "clip-path", and most browsers still support "clip". */
+.glitch {
+  color: white;
+  position: relative;
+}
+.glitch:before {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -9px;
+  text-shadow: 1px 0 blue;
+  top: -5px;
+  color: #FFD;
+  background: #111;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+  -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+.glitch:after {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -5px;
+  text-shadow: -1px 0 red;
+  top: -5px;
+  color: #DFF;
+  background: #111;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse;
+  -webkit-animation: noise-anim 2s infinite linear alternate-reverse;
+}
+@keyframes noise-anim {
+  0% {
+    clip: rect(80px, 9999px, 16px, 0);
+  }
+  5% {
+    clip: rect(94px, 9999px, 17px, 0);
+  }
+  10% {
+    clip: rect(9px, 9999px, 92px, 0);
+  }
+  15.0% {
+    clip: rect(37px, 9999px, 4px, 0);
+  }
+  20% {
+    clip: rect(53px, 9999px, 47px, 0);
+  }
+  25% {
+    clip: rect(99px, 9999px, 69px, 0);
+  }
+  30.0% {
+    clip: rect(15px, 9999px, 49px, 0);
+  }
+  35% {
+    clip: rect(83px, 9999px, 81px, 0);
+  }
+  40% {
+    clip: rect(55px, 9999px, 43px, 0);
+  }
+  45% {
+    clip: rect(28px, 9999px, 27px, 0);
+  }
+  50% {
+    clip: rect(64px, 9999px, 28px, 0);
+  }
+  55.0% {
+    clip: rect(76px, 9999px, 91px, 0);
+  }
+  60.0% {
+    clip: rect(29px, 9999px, 72px, 0);
+  }
+  65% {
+    clip: rect(70px, 9999px, 10px, 0);
+  }
+  70% {
+    clip: rect(5px, 9999px, 84px, 0);
+  }
+  75% {
+    clip: rect(46px, 9999px, 81px, 0);
+  }
+  80% {
+    clip: rect(7px, 9999px, 85px, 0);
+  }
+  85.0% {
+    clip: rect(17px, 9999px, 89px, 0);
+  }
+  90% {
+    clip: rect(41px, 9999px, 59px, 0);
+  }
+  95% {
+    clip: rect(53px, 9999px, 90px, 0);
+  }
+  100% {
+    clip: rect(10px, 9999px, 30px, 0);
+  }
+}
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(84px, 9999px, 3px, 0);
+  }
+  5% {
+    clip: rect(31px, 9999px, 69px, 0);
+  }
+  10% {
+    clip: rect(37px, 9999px, 33px, 0);
+  }
+  15.0% {
+    clip: rect(18px, 9999px, 6px, 0);
+  }
+  20% {
+    clip: rect(25px, 9999px, 87px, 0);
+  }
+  25% {
+    clip: rect(100px, 9999px, 8px, 0);
+  }
+  30.0% {
+    clip: rect(24px, 9999px, 87px, 0);
+  }
+  35% {
+    clip: rect(39px, 9999px, 16px, 0);
+  }
+  40% {
+    clip: rect(96px, 9999px, 25px, 0);
+  }
+  45% {
+    clip: rect(16px, 9999px, 100px, 0);
+  }
+  50% {
+    clip: rect(92px, 9999px, 76px, 0);
+  }
+  55.0% {
+    clip: rect(29px, 9999px, 40px, 0);
+  }
+  60.0% {
+    clip: rect(40px, 9999px, 39px, 0);
+  }
+  65% {
+    clip: rect(94px, 9999px, 44px, 0);
+  }
+  70% {
+    clip: rect(2px, 9999px, 78px, 0);
+  }
+  75% {
+    clip: rect(86px, 9999px, 50px, 0);
+  }
+  80% {
+    clip: rect(2px, 9999px, 46px, 0);
+  }
+  85.0% {
+    clip: rect(41px, 9999px, 71px, 0);
+  }
+  90% {
+    clip: rect(75px, 9999px, 15px, 0);
+  }
+  95% {
+    clip: rect(41px, 9999px, 8px, 0);
+  }
+  100% {
+    clip: rect(23px, 9999px, 75px, 0);
+  }
+}
+
+.glitchy {
+  color: white;
+  position: relative;
+}
+.glitchy:before {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -9px;
+  text-shadow: 1px 0 blue;
+  top: -5px;
+  color: #FFD;
+  background: #111;
+  overflow: hidden;
+  clip-path: polygon(0 0);
+  animation: noise-animY-2 3s infinite linear alternate-reverse;
+  -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
+}
+.glitchy:after {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -5px;
+  text-shadow: -1px 0 red;
+  top: -5px;
+  color: #DFF;
+  background: #111;
+  overflow: hidden;
+  clip-path: polygon(0 0);
+  animation: noise-animY 2s infinite linear alternate-reverse;
+  -webkit-animation: noise-animY 2s infinite linear alternate-reverse;
+}
+@keyframes noise-animY {
+  0% {
+    clip-path: polygon(0 80px, 100% 80px, 100% 16px, 0 16px);
+  }
+  5% {
+    clip-path: polygon(0 94px, 100% 94px, 100% 17px, 0 17px);
+  }
+  10% {
+    clip-path: polygon(0 9px, 100% 9px, 100% 92px, 0 92px);
+  }
+  15.0% {
+    clip-path: polygon(0 37px, 100% 37px, 100% 4px, 0 4px);
+  }
+  20% {
+    clip-path: polygon(0 53px, 100% 53px, 100% 47px, 0 47px);
+  }
+  25% {
+    clip-path: polygon(0 99px, 100% 99px, 100% 69px, 0 69px);
+  }
+  30.0% {
+    clip-path: polygon(0 15px, 100% 15px, 100% 49px, 0 49px);
+  }
+  35% {
+    clip-path: polygon(0 83px, 100% 83px, 100% 81px, 0 81px);
+  }
+  40% {
+    clip-path: polygon(0 55px, 100% 55px, 100% 43px, 0 43px);
+  }
+  45% {
+    clip-path: polygon(0 28px, 100% 28px, 100% 27px, 0 27px);
+  }
+  50% {
+    clip-path: polygon(0 64px, 100% 64px, 100% 28px, 0 28px);
+  }
+  55.0% {
+    clip-path: polygon(0 76px, 100% 76px, 100% 91px, 0 91px);
+  }
+  60.0% {
+    clip-path: polygon(0 29px, 100% 29px, 100% 72px, 0 72px);
+  }
+  65% {
+    clip-path: polygon(0 70px, 100% 70px, 100% 10px, 0 10px);
+  }
+  70% {
+    clip-path: polygon(0 5px, 100% 5px, 100% 84px, 0 84px);
+  }
+  75% {
+    clip-path: polygon(0 46px, 100% 46px, 100% 81px, 0 81px);
+  }
+  80% {
+    clip-path: polygon(0 7px, 100% 7px, 100% 85px, 0 85px);
+  }
+  85.0% {
+    clip-path: polygon(0 17px, 100% 17px, 100% 89px, 0 89px);
+  }
+  90% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 59px, 0 59px);
+  }
+  95% {
+    clip-path: polygon(0 53px, 100% 53px, 100% 90px, 0 90px);
+  }
+  100% {
+    clip-path: polygon(0 10px, 100% 10px, 100% 30px, 0 30px);
+  }
+}
+@keyframes noise-animY-2 {
+  0% {
+    clip-path: polygon(0 84px, 100% 84px, 100% 3px, 0 3px);
+  }
+  5% {
+    clip-path: polygon(0 31px, 100% 31px, 100% 69px, 0 69px);
+  }
+  10% {
+    clip-path: polygon(0 37px, 100% 37px, 100% 33px, 0 33px);
+  }
+  15.0% {
+    clip-path: polygon(0 18px, 100% 18px, 100% 6px, 0 6px);
+  }
+  20% {
+    clip-path: polygon(0 25px, 100% 25px, 100% 87px, 0 87px);
+  }
+  25% {
+    clip-path: polygon(0 100px, 100% 100px, 100% 8px, 0 8px);
+  }
+  30.0% {
+    clip-path: polygon(0 24px, 100% 24px, 100% 87px, 0 87px);
+  }
+  35% {
+    clip-path: polygon(0 39px, 100% 39px, 100% 16px, 0 16px);
+  }
+  40% {
+    clip-path: polygon(0 96px, 100% 96px, 100% 25px, 0 25px);
+  }
+  45% {
+    clip-path: polygon(0 16px, 100% 16px, 100% 100px, 0 100px);
+  }
+  50% {
+    clip-path: polygon(0 92px, 100% 92px, 100% 76px, 0 76px);
+  }
+  55.0% {
+    clip-path: polygon(0 29px, 100% 29px, 100% 40px, 0 40px);
+  }
+  60.0% {
+    clip-path: polygon(0 40px, 100% 40px, 100% 39px, 0 39px);
+  }
+  65% {
+    clip-path: polygon(0 94px, 100% 94px, 100% 44px, 0 44px);
+  }
+  70% {
+    clip-path: polygon(0 2px, 100% 2px, 100% 78px, 0 78px);
+  }
+  75% {
+    clip-path: polygon(0 86px, 100% 86px, 100% 50px, 0 50px);
+  }
+  80% {
+    clip-path: polygon(0 2px, 100% 2px, 100% 46px, 0 46px);
+  }
+  85.0% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 71px, 0 71px);
+  }
+  90% {
+    clip-path: polygon(0 75px, 100% 75px, 100% 15px, 0 15px);
+  }
+  95% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 8px, 0 8px);
+  }
+  100% {
+    clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
+  }
+}
+
+/* <<shake>>  */
+@-webkit-keyframes shakeanim {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@-o-keyframes shakeanim {
+	0% { -o-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -o-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -o-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -o-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -o-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -o-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -o-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -o-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -o-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -o-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -o-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@keyframes shakeanim {
+	0% { transform: translate(2px, 1px) rotate(0deg); }
+	10% { transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { transform: translate(-3px, 0px) rotate(1deg); }
+	30% { transform: translate(0px, 2px) rotate(0deg); }
+	40% { transform: translate(1px, -1px) rotate(1deg); }
+	50% { transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { transform: translate(-3px, 1px) rotate(0deg); }
+	70% { transform: translate(2px, 1px) rotate(-1deg); }
+	80% { transform: translate(-1px, -1px) rotate(1deg); }
+	90% { transform: translate(2px, 2px) rotate(0deg); }
+	100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake-block,
+.shake {
+	-webkit-animation-duration: 0.8s;
+	     -o-animation-duration: 0.8s;
+	        animation-duration: 0.8s;
+	-webkit-animation-iteration-count: infinite;
+	     -o-animation-iteration-count: infinite;
+	        animation-iteration-count: infinite;
+	-webkit-animation-name: shakeanim;
+	     -o-animation-name: shakeanim;
+	        animation-name: shakeanim;
+	-webkit-animation-timing-function: linear;
+	     -o-animation-timing-function: linear;
+	        animation-timing-function: linear;
+	-webkit-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+}
+.shake-block {
+	display: block;
+}
+.shake {
+	display: inline-block;
+}
